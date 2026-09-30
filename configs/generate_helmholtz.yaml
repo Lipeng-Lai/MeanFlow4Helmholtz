@@ -1,0 +1,38 @@
+frequencies_hz: [8, 10, 12, 14, 16]
+
+grid:
+  shape: [70, 70]
+  spacing_km: [0.01, 0.01]
+
+physics:
+  background_velocity_km_s: 1.5
+
+source:
+  placement: fixed
+  x_indices: [21, 31, 41, 51]
+  z_index: 2
+
+solver:
+  stencil: nine_point_isotropic
+  absorbing_layer:
+    padding_cells: 12
+    strength: 1.5
+    power: 2.0
+  relative_residual_tolerance: 1.0e-8
+
+dataset:
+  output_root: dataset
+  storage_format: factorized_npy
+  velocity_scale_to_km_s: 0.001
+  split_seed: 42
+  train_models_per_group: 480
+  val_models_per_group: 20
+  model_groups:
+    curvevel_a_1: dataset/velocity_models/CurveVel-A-1.npy
+    curvevel_a_2: dataset/velocity_models/CurveVel-A-2.npy
+    curvefault_a_1: dataset/velocity_models/CurveFault-A-1.npy
+    curvefault_a_2: dataset/velocity_models/CurveFault-A-2.npy
+    flatfault_a_1: dataset/velocity_models/FlatFault-A-1.npy
+    flatfault_a_2: dataset/velocity_models/FlatFault-A-2.npy
+    flatfault_b_1: dataset/velocity_models/FlatFault-B-1.npy
+    flatfault_b_2: dataset/velocity_models/FlatFault-B-2.npy

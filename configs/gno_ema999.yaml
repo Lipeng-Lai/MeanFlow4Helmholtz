@@ -1,0 +1,60 @@
+experiment:
+  name: gno_ema999
+  output_dir: checkpoint/gno_ema999
+  seed: 42
+method:
+  type: gno
+data:
+  train_root: dataset/train
+  val_root: dataset/val
+  test_root: dataset/test
+  frequencies_hz: [8, 10, 12, 14, 16]
+  source_count: 4
+  test_model_names: [marmousi, segeage_salt, otway, overthrust]
+  num_workers: 0
+  normalization_epsilon: 1.0e-6
+  normalization_chunk_models: 16
+physics:
+  spacing_km: [0.01, 0.01]
+  background_velocity_km_s: 1.5
+model:
+  backbone: unet
+  noisy_channels: 2
+  condition_channels: 3
+  out_channels: 2
+  base_channels: 29
+  channel_multipliers: [1, 2, 4, 8, 16]
+  num_res_blocks: 2
+  attention_downsample_factors: [4, 8, 16]
+  num_heads: 4
+  dropout: 0.0
+diffusion:
+  steps: 1000
+  schedule: cosine
+  prediction: x0
+  clip_denoised: false
+sampling:
+  steps: 1
+  eta: 0.0
+  pde_guidance:
+    enabled: false
+train:
+  max_steps: 200000
+  batch_size: 16
+  val_batch_size: 16
+  gradient_accumulation: 1
+  gradient_clip_norm: 1.0
+  ema_decay: 0.999
+  log_every: 100
+  validate_every: 2000
+  save_every: 50000
+  optimizer:
+    learning_rate: 1.0e-4
+    weight_decay: 5.0e-5
+    betas: [0.9, 0.999]
+  scheduler:
+    type: cosine
+    eta_min: 1.0e-6
+validation:
+  selection_metric: relative_l2
+  max_batches: null

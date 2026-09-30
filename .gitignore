@@ -1,0 +1,22 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.benchmarks/
+
+# Generated training artifacts and local experiment state.
+checkpoint/
+dataset/train/
+dataset/val/
+dataset/test/data/
+dataset/test/velocity_models_70x70/
+dataset/test/velocity_models_140x140/
+*.pth
+*.pt
+*.ckpt
+runlog.txt
+
+# Local logs and editor files.
+*.log
+.idea/
+.vscode/
+.DS_Store
