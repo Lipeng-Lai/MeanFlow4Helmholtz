@@ -1,4 +1,4 @@
-"""Plot CurveFault-A residuals for diffusion and Mean Flows at multiple steps."""
+"""Plot FlatFault-A residuals for diffusion and Mean Flows at multiple steps."""
 
 from __future__ import annotations
 
@@ -21,7 +21,7 @@ sys.path.insert(0, str(SCRIPT_DIR))
 import plot_curvefault_a as WRAPPER  # noqa: E402
 
 
-# The wrapper applies the CurveFault-A sample configuration to the shared plotter.
+# The wrapper applies the FlatFault-A sample configuration to the shared plotter.
 BASE = WRAPPER.PLOT
 METHODS = ("diffusion", "meanflow")
 CHECKPOINTS = {

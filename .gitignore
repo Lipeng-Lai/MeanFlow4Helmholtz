@@ -20,3 +20,11 @@ runlog.txt
 .idea/
 .vscode/
 .DS_Store
+
+# Raw and generated dataset assets; keep dataset Python sources tracked.
+dataset/velocity_models/
+dataset/velocity_models_70x70/
+dataset/velocity_models_140x140/
+dataset/**/*.npy
+dataset/**/*.npz
+dataset/**/models.csv

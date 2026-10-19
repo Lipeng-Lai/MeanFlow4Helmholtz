@@ -15,20 +15,22 @@ if SPEC is None or SPEC.loader is None:
 PLOT = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(PLOT)
 
-# Test-set model 3 is overthrust.  Keep the Marmousi comparison settings:
-# 16 Hz, source 2, and two-step field predictions.
-PLOT.SAMPLE_INDEX = 78
+# Test-set model 3 is Overthrust, at 16 Hz with source (x, z) = (31, 2).
+# Inherit the shared one-step prediction and 1/2/4/8-step comparison settings.
+PLOT.SAMPLE_INDEX = 221
 PLOT.MODEL_INDEX = 3
-PLOT.FREQUENCY_INDEX = 4
-PLOT.SOURCE_INDEX = 2
+PLOT.FREQUENCY_INDEX = 13
+PLOT.SOURCE_INDEX = 1
 PLOT.DATASET_SPLIT = "test"
+# Use 3--16 Hz; the shared loader maps stored fields by physical frequency
+# and solves frequencies that are absent from the test arrays.
+PLOT.FREQUENCIES_HZ = list(range(3, 17))
 PLOT.SOURCE_VELOCITY_PATH = (
-    PLOT.ROOT / "dataset" / "test" / "velocity_models_70x70" / "overthrust.npy"
+    PLOT.ROOT / "dataset" / "velocity_models_70x70" / "overthrust.npy"
 )
 PLOT.OUTPUT_DIR = HERE
 PLOT.OUTPUT_STEM = "overthrust_comparison"
 PLOT.VELOCITY_MODEL_TITLE = "Overthrust velocity model"
-PLOT.PREDICTION_STEPS = 2
 
 
 if __name__ == "__main__":

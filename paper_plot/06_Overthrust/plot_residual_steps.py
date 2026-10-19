@@ -15,15 +15,16 @@ if SPEC is None or SPEC.loader is None:
 PLOT = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(PLOT)
 
-# Test-set model 3 is overthrust.  Keep the same 16 Hz/source-2 sample as the
+# Test-set model 3 is overthrust.  Keep the same 16 Hz/source-1 sample as the
 # existing Overthrust comparison figure.
-PLOT.BASE.SAMPLE_INDEX = 78
+PLOT.BASE.SAMPLE_INDEX = 221
 PLOT.BASE.MODEL_INDEX = 3
-PLOT.BASE.FREQUENCY_INDEX = 4
-PLOT.BASE.SOURCE_INDEX = 2
+PLOT.BASE.FREQUENCY_INDEX = 13
+PLOT.BASE.SOURCE_INDEX = 1
 PLOT.BASE.DATASET_SPLIT = "test"
+PLOT.BASE.FREQUENCIES_HZ = list(range(3, 17))
 PLOT.BASE.SOURCE_VELOCITY_PATH = (
-    PLOT.BASE.ROOT / "dataset" / "test" / "velocity_models_70x70" / "overthrust.npy"
+    PLOT.BASE.ROOT / "dataset" / "velocity_models_70x70" / "overthrust.npy"
 )
 PLOT.OUTPUT_DIR = HERE
 PLOT.OUTPUT_STEM = "overthrust_residual_steps"

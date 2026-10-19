@@ -1,4 +1,4 @@
-"""Plot sample 2240 using the shared CurveFault-A comparison layout."""
+"""Plot a validation FlatFault-A sample using the shared comparison layout."""
 
 from __future__ import annotations
 
@@ -15,13 +15,15 @@ if SPEC is None or SPEC.loader is None:
 PLOT = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(PLOT)
 
-PLOT.SAMPLE_INDEX = 2240
-PLOT.MODEL_INDEX = 112
-PLOT.FREQUENCY_INDEX = 0
-PLOT.SOURCE_INDEX = 0
+# Use the original flatfault_a_2 source model 153 (validation model 40),
+# at 14 Hz with source position (x, z) = (41, 2).
+PLOT.SAMPLE_INDEX = 2286
+PLOT.MODEL_INDEX = 40
+PLOT.FREQUENCY_INDEX = 11
+PLOT.SOURCE_INDEX = 2
 PLOT.OUTPUT_DIR = HERE
 PLOT.OUTPUT_STEM = "curvefault_a_comparison"
-PLOT.VELOCITY_MODEL_TITLE = "CurveFault-A velocity model"
+PLOT.VELOCITY_MODEL_TITLE = "FlatFault-A velocity model"
 
 
 if __name__ == "__main__":

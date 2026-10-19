@@ -1,0 +1,511 @@
+benchmark,method,sampling_steps,frequency_count,frequency_hz,repeat,seconds,unit
+sampling_steps,fno,1,1,12,0,0.012467795997508802,s/10-model batch
+sampling_steps,fno,1,1,12,1,0.012836016991059296,s/10-model batch
+sampling_steps,fno,1,1,12,2,0.012994737000553869,s/10-model batch
+sampling_steps,fno,1,1,12,3,0.013056561001576483,s/10-model batch
+sampling_steps,fno,1,1,12,4,0.01284788800694514,s/10-model batch
+sampling_steps,fno,1,1,12,5,0.012971649004612118,s/10-model batch
+sampling_steps,fno,1,1,12,6,0.013316019001649693,s/10-model batch
+sampling_steps,fno,1,1,12,7,0.012585161995957606,s/10-model batch
+sampling_steps,fno,1,1,12,8,0.013177018001442775,s/10-model batch
+sampling_steps,fno,1,1,12,9,0.012670297990553081,s/10-model batch
+sampling_steps,diffusion,1,1,12,0,0.016542213008506224,s/10-model batch
+sampling_steps,diffusion,1,1,12,1,0.016725977999158204,s/10-model batch
+sampling_steps,diffusion,1,1,12,2,0.01683307699568104,s/10-model batch
+sampling_steps,diffusion,1,1,12,3,0.01739800799987279,s/10-model batch
+sampling_steps,diffusion,1,1,12,4,0.016500033001648262,s/10-model batch
+sampling_steps,diffusion,1,1,12,5,0.017359131990815513,s/10-model batch
+sampling_steps,diffusion,1,1,12,6,0.01648271200247109,s/10-model batch
+sampling_steps,diffusion,1,1,12,7,0.016288781989715062,s/10-model batch
+sampling_steps,diffusion,1,1,12,8,0.016637398992315866,s/10-model batch
+sampling_steps,diffusion,1,1,12,9,0.016780754012870602,s/10-model batch
+sampling_steps,diffusion,2,1,12,0,0.032561699001234956,s/10-model batch
+sampling_steps,diffusion,2,1,12,1,0.0347121730010258,s/10-model batch
+sampling_steps,diffusion,2,1,12,2,0.03385856001114007,s/10-model batch
+sampling_steps,diffusion,2,1,12,3,0.0354922869883012,s/10-model batch
+sampling_steps,diffusion,2,1,12,4,0.033007461999659427,s/10-model batch
+sampling_steps,diffusion,2,1,12,5,0.033680809996440075,s/10-model batch
+sampling_steps,diffusion,2,1,12,6,0.033283686003414914,s/10-model batch
+sampling_steps,diffusion,2,1,12,7,0.03338032800820656,s/10-model batch
+sampling_steps,diffusion,2,1,12,8,0.034626729000592604,s/10-model batch
+sampling_steps,diffusion,2,1,12,9,0.03275446000043303,s/10-model batch
+sampling_steps,diffusion,4,1,12,0,0.06735063700762112,s/10-model batch
+sampling_steps,diffusion,4,1,12,1,0.067864793993067,s/10-model batch
+sampling_steps,diffusion,4,1,12,2,0.0705979100021068,s/10-model batch
+sampling_steps,diffusion,4,1,12,3,0.06807147999643348,s/10-model batch
+sampling_steps,diffusion,4,1,12,4,0.06811579500208609,s/10-model batch
+sampling_steps,diffusion,4,1,12,5,0.06853956400300376,s/10-model batch
+sampling_steps,diffusion,4,1,12,6,0.07058060100825969,s/10-model batch
+sampling_steps,diffusion,4,1,12,7,0.06684187999053393,s/10-model batch
+sampling_steps,diffusion,4,1,12,8,0.06711219898716081,s/10-model batch
+sampling_steps,diffusion,4,1,12,9,0.0668919379968429,s/10-model batch
+sampling_steps,diffusion,8,1,12,0,0.13711504699313082,s/10-model batch
+sampling_steps,diffusion,8,1,12,1,0.13352657000359613,s/10-model batch
+sampling_steps,diffusion,8,1,12,2,0.13977142800285947,s/10-model batch
+sampling_steps,diffusion,8,1,12,3,0.14418542198836803,s/10-model batch
+sampling_steps,diffusion,8,1,12,4,0.13524807000067085,s/10-model batch
+sampling_steps,diffusion,8,1,12,5,0.1351026060001459,s/10-model batch
+sampling_steps,diffusion,8,1,12,6,0.13898642199637834,s/10-model batch
+sampling_steps,diffusion,8,1,12,7,0.13708996599598322,s/10-model batch
+sampling_steps,diffusion,8,1,12,8,0.13772763800807297,s/10-model batch
+sampling_steps,diffusion,8,1,12,9,0.13443446399469394,s/10-model batch
+sampling_steps,meanflow,1,1,12,0,0.016532471010577865,s/10-model batch
+sampling_steps,meanflow,1,1,12,1,0.01758048300689552,s/10-model batch
+sampling_steps,meanflow,1,1,12,2,0.01815040101064369,s/10-model batch
+sampling_steps,meanflow,1,1,12,3,0.017064712010324,s/10-model batch
+sampling_steps,meanflow,1,1,12,4,0.017631181006436236,s/10-model batch
+sampling_steps,meanflow,1,1,12,5,0.01801658199110534,s/10-model batch
+sampling_steps,meanflow,1,1,12,6,0.017237639011000283,s/10-model batch
+sampling_steps,meanflow,1,1,12,7,0.01738325100450311,s/10-model batch
+sampling_steps,meanflow,1,1,12,8,0.016665693998220377,s/10-model batch
+sampling_steps,meanflow,1,1,12,9,0.016742623003665358,s/10-model batch
+sampling_steps,meanflow,2,1,12,0,0.03349541299394332,s/10-model batch
+sampling_steps,meanflow,2,1,12,1,0.03381644100591075,s/10-model batch
+sampling_steps,meanflow,2,1,12,2,0.03371515999606345,s/10-model batch
+sampling_steps,meanflow,2,1,12,3,0.03294602000096347,s/10-model batch
+sampling_steps,meanflow,2,1,12,4,0.03343369699723553,s/10-model batch
+sampling_steps,meanflow,2,1,12,5,0.03309938599704765,s/10-model batch
+sampling_steps,meanflow,2,1,12,6,0.03252711899403948,s/10-model batch
+sampling_steps,meanflow,2,1,12,7,0.03359051600273233,s/10-model batch
+sampling_steps,meanflow,2,1,12,8,0.03256033100478817,s/10-model batch
+sampling_steps,meanflow,2,1,12,9,0.03204887099855114,s/10-model batch
+sampling_steps,meanflow,4,1,12,0,0.06657972400716972,s/10-model batch
+sampling_steps,meanflow,4,1,12,1,0.0653575120086316,s/10-model batch
+sampling_steps,meanflow,4,1,12,2,0.06621128400729503,s/10-model batch
+sampling_steps,meanflow,4,1,12,3,0.06545123900286853,s/10-model batch
+sampling_steps,meanflow,4,1,12,4,0.06458776499493979,s/10-model batch
+sampling_steps,meanflow,4,1,12,5,0.06546635799168143,s/10-model batch
+sampling_steps,meanflow,4,1,12,6,0.06505210600153077,s/10-model batch
+sampling_steps,meanflow,4,1,12,7,0.06830051800352521,s/10-model batch
+sampling_steps,meanflow,4,1,12,8,0.06676053699629847,s/10-model batch
+sampling_steps,meanflow,4,1,12,9,0.06583174000843428,s/10-model batch
+sampling_steps,meanflow,8,1,12,0,0.1299390689964639,s/10-model batch
+sampling_steps,meanflow,8,1,12,1,0.13137958200240973,s/10-model batch
+sampling_steps,meanflow,8,1,12,2,0.13310693300445564,s/10-model batch
+sampling_steps,meanflow,8,1,12,3,0.1310890000022482,s/10-model batch
+sampling_steps,meanflow,8,1,12,4,0.12986648599326145,s/10-model batch
+sampling_steps,meanflow,8,1,12,5,0.13060928600316402,s/10-model batch
+sampling_steps,meanflow,8,1,12,6,0.13080914599413518,s/10-model batch
+sampling_steps,meanflow,8,1,12,7,0.13038577399856877,s/10-model batch
+sampling_steps,meanflow,8,1,12,8,0.12710193199745845,s/10-model batch
+sampling_steps,meanflow,8,1,12,9,0.1328938480000943,s/10-model batch
+parallel_frequencies,meanflow,1,1,,0,0.014368500500859227,s/model
+parallel_frequencies,meanflow,1,1,,1,0.014745649600808975,s/model
+parallel_frequencies,meanflow,1,1,,2,0.013927732199954334,s/model
+parallel_frequencies,meanflow,1,1,,3,0.014976090099662543,s/model
+parallel_frequencies,meanflow,1,1,,4,0.015248559998872225,s/model
+parallel_frequencies,meanflow,1,1,,5,0.017455514300672804,s/model
+parallel_frequencies,meanflow,1,1,,6,0.014832777000265196,s/model
+parallel_frequencies,meanflow,1,1,,7,0.01427977959974669,s/model
+parallel_frequencies,meanflow,1,1,,8,0.014448408799944445,s/model
+parallel_frequencies,meanflow,1,1,,9,0.014645036098954733,s/model
+parallel_frequencies,meanflow,1,2,,0,0.01736898840026697,s/model
+parallel_frequencies,meanflow,1,2,,1,0.015297571499831974,s/model
+parallel_frequencies,meanflow,1,2,,2,0.01568088139902102,s/model
+parallel_frequencies,meanflow,1,2,,3,0.015030578400183004,s/model
+parallel_frequencies,meanflow,1,2,,4,0.015200724299938883,s/model
+parallel_frequencies,meanflow,1,2,,5,0.017885628700605595,s/model
+parallel_frequencies,meanflow,1,2,,6,0.016509986700839363,s/model
+parallel_frequencies,meanflow,1,2,,7,0.015546679199906066,s/model
+parallel_frequencies,meanflow,1,2,,8,0.014307186199584977,s/model
+parallel_frequencies,meanflow,1,2,,9,0.014829851499234792,s/model
+parallel_frequencies,meanflow,1,3,,0,0.013766204699641094,s/model
+parallel_frequencies,meanflow,1,3,,1,0.014010137200239114,s/model
+parallel_frequencies,meanflow,1,3,,2,0.013702616799855604,s/model
+parallel_frequencies,meanflow,1,3,,3,0.013887076800165233,s/model
+parallel_frequencies,meanflow,1,3,,4,0.013990990500315093,s/model
+parallel_frequencies,meanflow,1,3,,5,0.01451949960028287,s/model
+parallel_frequencies,meanflow,1,3,,6,0.015368461998878046,s/model
+parallel_frequencies,meanflow,1,3,,7,0.014299511999706738,s/model
+parallel_frequencies,meanflow,1,3,,8,0.013776140999107156,s/model
+parallel_frequencies,meanflow,1,3,,9,0.014190133901138324,s/model
+parallel_frequencies,meanflow,1,4,,0,0.012965129999793134,s/model
+parallel_frequencies,meanflow,1,4,,1,0.013395044099888764,s/model
+parallel_frequencies,meanflow,1,4,,2,0.013449832399783191,s/model
+parallel_frequencies,meanflow,1,4,,3,0.013241058400308248,s/model
+parallel_frequencies,meanflow,1,4,,4,0.01351070719974814,s/model
+parallel_frequencies,meanflow,1,4,,5,0.01325046850106446,s/model
+parallel_frequencies,meanflow,1,4,,6,0.013629602100991178,s/model
+parallel_frequencies,meanflow,1,4,,7,0.013350600600824691,s/model
+parallel_frequencies,meanflow,1,4,,8,0.014158373000100255,s/model
+parallel_frequencies,meanflow,1,4,,9,0.013235045899637043,s/model
+parallel_frequencies,meanflow,1,5,,0,0.013625797799613792,s/model
+parallel_frequencies,meanflow,1,5,,1,0.013377535800100305,s/model
+parallel_frequencies,meanflow,1,5,,2,0.013304955999774392,s/model
+parallel_frequencies,meanflow,1,5,,3,0.013441970500571188,s/model
+parallel_frequencies,meanflow,1,5,,4,0.013211458099249285,s/model
+parallel_frequencies,meanflow,1,5,,5,0.012941881000006105,s/model
+parallel_frequencies,meanflow,1,5,,6,0.013325741300650406,s/model
+parallel_frequencies,meanflow,1,5,,7,0.01356850839947583,s/model
+parallel_frequencies,meanflow,1,5,,8,0.013687235700490418,s/model
+parallel_frequencies,meanflow,1,5,,9,0.013756284400005824,s/model
+parallel_frequencies,meanflow,1,6,,0,0.01543836180062499,s/model
+parallel_frequencies,meanflow,1,6,,1,0.01458753040060401,s/model
+parallel_frequencies,meanflow,1,6,,2,0.01333122009964427,s/model
+parallel_frequencies,meanflow,1,6,,3,0.015380368199839723,s/model
+parallel_frequencies,meanflow,1,6,,4,0.01329509219940519,s/model
+parallel_frequencies,meanflow,1,6,,5,0.013755742399371228,s/model
+parallel_frequencies,meanflow,1,6,,6,0.01356332349969307,s/model
+parallel_frequencies,meanflow,1,6,,7,0.013642219800385647,s/model
+parallel_frequencies,meanflow,1,6,,8,0.013722601399058476,s/model
+parallel_frequencies,meanflow,1,6,,9,0.01386055830080295,s/model
+parallel_frequencies,meanflow,1,7,,0,0.013591321300191339,s/model
+parallel_frequencies,meanflow,1,7,,1,0.013172135100467131,s/model
+parallel_frequencies,meanflow,1,7,,2,0.01386579329991946,s/model
+parallel_frequencies,meanflow,1,7,,3,0.013694073099759407,s/model
+parallel_frequencies,meanflow,1,7,,4,0.014111178601160646,s/model
+parallel_frequencies,meanflow,1,7,,5,0.013541527900088113,s/model
+parallel_frequencies,meanflow,1,7,,6,0.013835474300140049,s/model
+parallel_frequencies,meanflow,1,7,,7,0.013114306599891278,s/model
+parallel_frequencies,meanflow,1,7,,8,0.013683346900506876,s/model
+parallel_frequencies,meanflow,1,7,,9,0.01371212999947602,s/model
+parallel_frequencies,meanflow,1,8,,0,0.01460845849942416,s/model
+parallel_frequencies,meanflow,1,8,,1,0.013669846201082692,s/model
+parallel_frequencies,meanflow,1,8,,2,0.013782259498839267,s/model
+parallel_frequencies,meanflow,1,8,,3,0.013872849199105985,s/model
+parallel_frequencies,meanflow,1,8,,4,0.014118464900820981,s/model
+parallel_frequencies,meanflow,1,8,,5,0.013794506600243039,s/model
+parallel_frequencies,meanflow,1,8,,6,0.013755176599079277,s/model
+parallel_frequencies,meanflow,1,8,,7,0.014073588799510617,s/model
+parallel_frequencies,meanflow,1,8,,8,0.01373991310101701,s/model
+parallel_frequencies,meanflow,1,8,,9,0.013926963700214401,s/model
+parallel_frequencies,meanflow,1,9,,0,0.014852152099774685,s/model
+parallel_frequencies,meanflow,1,9,,1,0.014815464899584185,s/model
+parallel_frequencies,meanflow,1,9,,2,0.014978408500610385,s/model
+parallel_frequencies,meanflow,1,9,,3,0.014703847099735868,s/model
+parallel_frequencies,meanflow,1,9,,4,0.014724444999592379,s/model
+parallel_frequencies,meanflow,1,9,,5,0.014785114700498526,s/model
+parallel_frequencies,meanflow,1,9,,6,0.014696582900069189,s/model
+parallel_frequencies,meanflow,1,9,,7,0.0146428181004012,s/model
+parallel_frequencies,meanflow,1,9,,8,0.014697006900678388,s/model
+parallel_frequencies,meanflow,1,9,,9,0.014637495399801992,s/model
+parallel_frequencies,meanflow,1,10,,0,0.01550851740030339,s/model
+parallel_frequencies,meanflow,1,10,,1,0.015588560901232996,s/model
+parallel_frequencies,meanflow,1,10,,2,0.015727314799732994,s/model
+parallel_frequencies,meanflow,1,10,,3,0.015476147001027129,s/model
+parallel_frequencies,meanflow,1,10,,4,0.015505295799812302,s/model
+parallel_frequencies,meanflow,1,10,,5,0.015531235899834428,s/model
+parallel_frequencies,meanflow,1,10,,6,0.015467908399295993,s/model
+parallel_frequencies,meanflow,1,10,,7,0.015788014499412382,s/model
+parallel_frequencies,meanflow,1,10,,8,0.01587712219916284,s/model
+parallel_frequencies,meanflow,1,10,,9,0.0157828987998073,s/model
+parallel_frequencies,meanflow,1,11,,0,0.01626414130005287,s/model
+parallel_frequencies,meanflow,1,11,,1,0.0166614715999458,s/model
+parallel_frequencies,meanflow,1,11,,2,0.016473045799648388,s/model
+parallel_frequencies,meanflow,1,11,,3,0.01635761040088255,s/model
+parallel_frequencies,meanflow,1,11,,4,0.01637487849948229,s/model
+parallel_frequencies,meanflow,1,11,,5,0.01651285230036592,s/model
+parallel_frequencies,meanflow,1,11,,6,0.016568411300249865,s/model
+parallel_frequencies,meanflow,1,11,,7,0.016388145700329915,s/model
+parallel_frequencies,meanflow,1,11,,8,0.01644831890007481,s/model
+parallel_frequencies,meanflow,1,11,,9,0.016462975399917923,s/model
+parallel_frequencies,meanflow,1,12,,0,0.01697218100016471,s/model
+parallel_frequencies,meanflow,1,12,,1,0.017029630500474013,s/model
+parallel_frequencies,meanflow,1,12,,2,0.01705540300026769,s/model
+parallel_frequencies,meanflow,1,12,,3,0.01694991339900298,s/model
+parallel_frequencies,meanflow,1,12,,4,0.016911756900663023,s/model
+parallel_frequencies,meanflow,1,12,,5,0.01697207859979244,s/model
+parallel_frequencies,meanflow,1,12,,6,0.016978712200943845,s/model
+parallel_frequencies,meanflow,1,12,,7,0.016910645300231408,s/model
+parallel_frequencies,meanflow,1,12,,8,0.016929576899565292,s/model
+parallel_frequencies,meanflow,1,12,,9,0.01692997189966263,s/model
+parallel_frequencies,meanflow,1,13,,0,0.01754548290045932,s/model
+parallel_frequencies,meanflow,1,13,,1,0.01755951249942882,s/model
+parallel_frequencies,meanflow,1,13,,2,0.01782414140034234,s/model
+parallel_frequencies,meanflow,1,13,,3,0.017669208699953743,s/model
+parallel_frequencies,meanflow,1,13,,4,0.017768848000559955,s/model
+parallel_frequencies,meanflow,1,13,,5,0.017674945200269576,s/model
+parallel_frequencies,meanflow,1,13,,6,0.017690081600449048,s/model
+parallel_frequencies,meanflow,1,13,,7,0.01745189549983479,s/model
+parallel_frequencies,meanflow,1,13,,8,0.017801586200948804,s/model
+parallel_frequencies,meanflow,1,13,,9,0.017685438800253906,s/model
+parallel_frequencies,meanflow,1,14,,0,0.018217517300217877,s/model
+parallel_frequencies,meanflow,1,14,,1,0.018219683899951634,s/model
+parallel_frequencies,meanflow,1,14,,2,0.018184733799716923,s/model
+parallel_frequencies,meanflow,1,14,,3,0.01826644710090477,s/model
+parallel_frequencies,meanflow,1,14,,4,0.018522365800163244,s/model
+parallel_frequencies,meanflow,1,14,,5,0.01878975159925176,s/model
+parallel_frequencies,meanflow,1,14,,6,0.01837619059951976,s/model
+parallel_frequencies,meanflow,1,14,,7,0.018898010600241832,s/model
+parallel_frequencies,meanflow,1,14,,8,0.018730033200699835,s/model
+parallel_frequencies,meanflow,1,14,,9,0.019055062798724976,s/model
+numerical_frequency,numerical_1threads,,1,3,0,0.031443862499145325,s/model
+numerical_frequency,numerical_1threads,,1,3,1,0.031136662801145576,s/model
+numerical_frequency,numerical_1threads,,1,3,2,0.031701428299129475,s/model
+numerical_frequency,numerical_1threads,,1,3,3,0.0318706641002791,s/model
+numerical_frequency,numerical_1threads,,1,3,4,0.030551357699732763,s/model
+numerical_frequency,numerical_1threads,,1,3,5,0.030082324700197206,s/model
+numerical_frequency,numerical_1threads,,1,3,6,0.02987305199931143,s/model
+numerical_frequency,numerical_1threads,,1,3,7,0.030311004898976535,s/model
+numerical_frequency,numerical_1threads,,1,3,8,0.030321828799787908,s/model
+numerical_frequency,numerical_1threads,,1,3,9,0.031039349400089122,s/model
+numerical_frequency,numerical_1threads,,1,4,0,0.030136537800717633,s/model
+numerical_frequency,numerical_1threads,,1,4,1,0.029885343500063756,s/model
+numerical_frequency,numerical_1threads,,1,4,2,0.030393225999432616,s/model
+numerical_frequency,numerical_1threads,,1,4,3,0.030791953000880314,s/model
+numerical_frequency,numerical_1threads,,1,4,4,0.030704336299095303,s/model
+numerical_frequency,numerical_1threads,,1,4,5,0.030284599900187458,s/model
+numerical_frequency,numerical_1threads,,1,4,6,0.02980471119954018,s/model
+numerical_frequency,numerical_1threads,,1,4,7,0.03003155900078127,s/model
+numerical_frequency,numerical_1threads,,1,4,8,0.03014464350126218,s/model
+numerical_frequency,numerical_1threads,,1,4,9,0.03020954859966878,s/model
+numerical_frequency,numerical_1threads,,1,5,0,0.030409824900561943,s/model
+numerical_frequency,numerical_1threads,,1,5,1,0.03014532240049448,s/model
+numerical_frequency,numerical_1threads,,1,5,2,0.030023393699957525,s/model
+numerical_frequency,numerical_1threads,,1,5,3,0.030342394500621594,s/model
+numerical_frequency,numerical_1threads,,1,5,4,0.030228695599362254,s/model
+numerical_frequency,numerical_1threads,,1,5,5,0.030361799300590065,s/model
+numerical_frequency,numerical_1threads,,1,5,6,0.030283090300508776,s/model
+numerical_frequency,numerical_1threads,,1,5,7,0.030120725999586283,s/model
+numerical_frequency,numerical_1threads,,1,5,8,0.030008816398913042,s/model
+numerical_frequency,numerical_1threads,,1,5,9,0.03029072359931888,s/model
+numerical_frequency,numerical_1threads,,1,6,0,0.0303885426998022,s/model
+numerical_frequency,numerical_1threads,,1,6,1,0.029810797300888224,s/model
+numerical_frequency,numerical_1threads,,1,6,2,0.02967589530016994,s/model
+numerical_frequency,numerical_1threads,,1,6,3,0.030049027998757083,s/model
+numerical_frequency,numerical_1threads,,1,6,4,0.030396996700437738,s/model
+numerical_frequency,numerical_1threads,,1,6,5,0.03018297960079508,s/model
+numerical_frequency,numerical_1threads,,1,6,6,0.030490760400425643,s/model
+numerical_frequency,numerical_1threads,,1,6,7,0.030110192399297374,s/model
+numerical_frequency,numerical_1threads,,1,6,8,0.03019564489950426,s/model
+numerical_frequency,numerical_1threads,,1,6,9,0.030260706700209992,s/model
+numerical_frequency,numerical_1threads,,1,7,0,0.030272417700325606,s/model
+numerical_frequency,numerical_1threads,,1,7,1,0.02987027220078744,s/model
+numerical_frequency,numerical_1threads,,1,7,2,0.029907776600157376,s/model
+numerical_frequency,numerical_1threads,,1,7,3,0.029404002999945077,s/model
+numerical_frequency,numerical_1threads,,1,7,4,0.03042665099928854,s/model
+numerical_frequency,numerical_1threads,,1,7,5,0.029314694499771577,s/model
+numerical_frequency,numerical_1threads,,1,7,6,0.029414138999709395,s/model
+numerical_frequency,numerical_1threads,,1,7,7,0.029603224100719673,s/model
+numerical_frequency,numerical_1threads,,1,7,8,0.029545780300395563,s/model
+numerical_frequency,numerical_1threads,,1,7,9,0.029542032899917102,s/model
+numerical_frequency,numerical_1threads,,1,8,0,0.029989714799739886,s/model
+numerical_frequency,numerical_1threads,,1,8,1,0.029826066599343903,s/model
+numerical_frequency,numerical_1threads,,1,8,2,0.029926846601301803,s/model
+numerical_frequency,numerical_1threads,,1,8,3,0.03002764529956039,s/model
+numerical_frequency,numerical_1threads,,1,8,4,0.031075231899740173,s/model
+numerical_frequency,numerical_1threads,,1,8,5,0.03039317850052612,s/model
+numerical_frequency,numerical_1threads,,1,8,6,0.02981605110107921,s/model
+numerical_frequency,numerical_1threads,,1,8,7,0.03031985120032914,s/model
+numerical_frequency,numerical_1threads,,1,8,8,0.029920275699987543,s/model
+numerical_frequency,numerical_1threads,,1,8,9,0.030092564701044468,s/model
+numerical_frequency,numerical_1threads,,1,9,0,0.029988042199693154,s/model
+numerical_frequency,numerical_1threads,,1,9,1,0.030069416800688486,s/model
+numerical_frequency,numerical_1threads,,1,9,2,0.030389313799969387,s/model
+numerical_frequency,numerical_1threads,,1,9,3,0.030321307899430393,s/model
+numerical_frequency,numerical_1threads,,1,9,4,0.030109570699278266,s/model
+numerical_frequency,numerical_1threads,,1,9,5,0.03013459089997923,s/model
+numerical_frequency,numerical_1threads,,1,9,6,0.03002134939888492,s/model
+numerical_frequency,numerical_1threads,,1,9,7,0.030561751600180286,s/model
+numerical_frequency,numerical_1threads,,1,9,8,0.02980367039999692,s/model
+numerical_frequency,numerical_1threads,,1,9,9,0.030132823600433768,s/model
+numerical_frequency,numerical_1threads,,1,10,0,0.029739429600886068,s/model
+numerical_frequency,numerical_1threads,,1,10,1,0.02969474979909137,s/model
+numerical_frequency,numerical_1threads,,1,10,2,0.030031570000573993,s/model
+numerical_frequency,numerical_1threads,,1,10,3,0.030174816198996268,s/model
+numerical_frequency,numerical_1threads,,1,10,4,0.030467868299456313,s/model
+numerical_frequency,numerical_1threads,,1,10,5,0.030016308900667355,s/model
+numerical_frequency,numerical_1threads,,1,10,6,0.029988064199278595,s/model
+numerical_frequency,numerical_1threads,,1,10,7,0.030297842998697887,s/model
+numerical_frequency,numerical_1threads,,1,10,8,0.029809334699530156,s/model
+numerical_frequency,numerical_1threads,,1,10,9,0.0298767415995826,s/model
+numerical_frequency,numerical_1threads,,1,11,0,0.030351614599931055,s/model
+numerical_frequency,numerical_1threads,,1,11,1,0.029984940998838285,s/model
+numerical_frequency,numerical_1threads,,1,11,2,0.03011340600060066,s/model
+numerical_frequency,numerical_1threads,,1,11,3,0.03078074450022541,s/model
+numerical_frequency,numerical_1threads,,1,11,4,0.02967110199970193,s/model
+numerical_frequency,numerical_1threads,,1,11,5,0.030046999201294965,s/model
+numerical_frequency,numerical_1threads,,1,11,6,0.029621524098911323,s/model
+numerical_frequency,numerical_1threads,,1,11,7,0.029981041999417358,s/model
+numerical_frequency,numerical_1threads,,1,11,8,0.029754021400003695,s/model
+numerical_frequency,numerical_1threads,,1,11,9,0.029808579898963218,s/model
+numerical_frequency,numerical_1threads,,1,12,0,0.02997407749935519,s/model
+numerical_frequency,numerical_1threads,,1,12,1,0.029308435699203984,s/model
+numerical_frequency,numerical_1threads,,1,12,2,0.029510869900695978,s/model
+numerical_frequency,numerical_1threads,,1,12,3,0.029169462800200562,s/model
+numerical_frequency,numerical_1threads,,1,12,4,0.030195544099842663,s/model
+numerical_frequency,numerical_1threads,,1,12,5,0.03041461989923846,s/model
+numerical_frequency,numerical_1threads,,1,12,6,0.030399490300624166,s/model
+numerical_frequency,numerical_1threads,,1,12,7,0.030402173098991625,s/model
+numerical_frequency,numerical_1threads,,1,12,8,0.03014558440045221,s/model
+numerical_frequency,numerical_1threads,,1,12,9,0.02986107960023219,s/model
+numerical_frequency,numerical_1threads,,1,13,0,0.029640782601200046,s/model
+numerical_frequency,numerical_1threads,,1,13,1,0.030848318799689876,s/model
+numerical_frequency,numerical_1threads,,1,13,2,0.03020641519979108,s/model
+numerical_frequency,numerical_1threads,,1,13,3,0.03004830419959035,s/model
+numerical_frequency,numerical_1threads,,1,13,4,0.029981361699174158,s/model
+numerical_frequency,numerical_1threads,,1,13,5,0.02940061550034443,s/model
+numerical_frequency,numerical_1threads,,1,13,6,0.029924969498824793,s/model
+numerical_frequency,numerical_1threads,,1,13,7,0.029878026100050192,s/model
+numerical_frequency,numerical_1threads,,1,13,8,0.030180837100488134,s/model
+numerical_frequency,numerical_1threads,,1,13,9,0.02947452840016922,s/model
+numerical_frequency,numerical_1threads,,1,14,0,0.029460696899332107,s/model
+numerical_frequency,numerical_1threads,,1,14,1,0.029596789000788704,s/model
+numerical_frequency,numerical_1threads,,1,14,2,0.03056521169928601,s/model
+numerical_frequency,numerical_1threads,,1,14,3,0.030124870099825785,s/model
+numerical_frequency,numerical_1threads,,1,14,4,0.029932437000388744,s/model
+numerical_frequency,numerical_1threads,,1,14,5,0.029674808599520475,s/model
+numerical_frequency,numerical_1threads,,1,14,6,0.030214198000612667,s/model
+numerical_frequency,numerical_1threads,,1,14,7,0.03011807450093329,s/model
+numerical_frequency,numerical_1threads,,1,14,8,0.030046109099930617,s/model
+numerical_frequency,numerical_1threads,,1,14,9,0.030178656100179068,s/model
+numerical_frequency,numerical_1threads,,1,15,0,0.0295357086986769,s/model
+numerical_frequency,numerical_1threads,,1,15,1,0.030085801200766583,s/model
+numerical_frequency,numerical_1threads,,1,15,2,0.030701225899974816,s/model
+numerical_frequency,numerical_1threads,,1,15,3,0.030785890900006052,s/model
+numerical_frequency,numerical_1threads,,1,15,4,0.029816856399702375,s/model
+numerical_frequency,numerical_1threads,,1,15,5,0.02976766389911063,s/model
+numerical_frequency,numerical_1threads,,1,15,6,0.030004061700310558,s/model
+numerical_frequency,numerical_1threads,,1,15,7,0.030013785998744425,s/model
+numerical_frequency,numerical_1threads,,1,15,8,0.030133689199283255,s/model
+numerical_frequency,numerical_1threads,,1,15,9,0.03067684690031456,s/model
+numerical_frequency,numerical_1threads,,1,16,0,0.02957796260016039,s/model
+numerical_frequency,numerical_1threads,,1,16,1,0.029854430499835872,s/model
+numerical_frequency,numerical_1threads,,1,16,2,0.030125360100646502,s/model
+numerical_frequency,numerical_1threads,,1,16,3,0.03126493760064477,s/model
+numerical_frequency,numerical_1threads,,1,16,4,0.029922132800857072,s/model
+numerical_frequency,numerical_1threads,,1,16,5,0.03105719219893217,s/model
+numerical_frequency,numerical_1threads,,1,16,6,0.03044289989920799,s/model
+numerical_frequency,numerical_1threads,,1,16,7,0.030492993800726252,s/model
+numerical_frequency,numerical_1threads,,1,16,8,0.02976866050012177,s/model
+numerical_frequency,numerical_1threads,,1,16,9,0.02985438529867679,s/model
+numerical_frequency,numerical_4threads,,1,3,0,0.03191048430016963,s/model
+numerical_frequency,numerical_4threads,,1,3,1,0.03172911279980326,s/model
+numerical_frequency,numerical_4threads,,1,3,2,0.03216128839994781,s/model
+numerical_frequency,numerical_4threads,,1,3,3,0.031773815800261215,s/model
+numerical_frequency,numerical_4threads,,1,3,4,0.032208504500158594,s/model
+numerical_frequency,numerical_4threads,,1,3,5,0.03188860619993648,s/model
+numerical_frequency,numerical_4threads,,1,3,6,0.0325387506003608,s/model
+numerical_frequency,numerical_4threads,,1,3,7,0.03135365880007157,s/model
+numerical_frequency,numerical_4threads,,1,3,8,0.031296903999464123,s/model
+numerical_frequency,numerical_4threads,,1,3,9,0.03108801560010761,s/model
+numerical_frequency,numerical_4threads,,1,4,0,0.030916293400514404,s/model
+numerical_frequency,numerical_4threads,,1,4,1,0.03137267810088815,s/model
+numerical_frequency,numerical_4threads,,1,4,2,0.030932194099295884,s/model
+numerical_frequency,numerical_4threads,,1,4,3,0.03319695779937319,s/model
+numerical_frequency,numerical_4threads,,1,4,4,0.031879876700986645,s/model
+numerical_frequency,numerical_4threads,,1,4,5,0.031426407699473205,s/model
+numerical_frequency,numerical_4threads,,1,4,6,0.031493707100162284,s/model
+numerical_frequency,numerical_4threads,,1,4,7,0.031318937600008215,s/model
+numerical_frequency,numerical_4threads,,1,4,8,0.031451679300516844,s/model
+numerical_frequency,numerical_4threads,,1,4,9,0.03132395700085908,s/model
+numerical_frequency,numerical_4threads,,1,5,0,0.031361565399856774,s/model
+numerical_frequency,numerical_4threads,,1,5,1,0.03132070919964462,s/model
+numerical_frequency,numerical_4threads,,1,5,2,0.030991729599190877,s/model
+numerical_frequency,numerical_4threads,,1,5,3,0.03158617370063439,s/model
+numerical_frequency,numerical_4threads,,1,5,4,0.032322696498886215,s/model
+numerical_frequency,numerical_4threads,,1,5,5,0.031124885998724493,s/model
+numerical_frequency,numerical_4threads,,1,5,6,0.03086784089973662,s/model
+numerical_frequency,numerical_4threads,,1,5,7,0.03190433720010333,s/model
+numerical_frequency,numerical_4threads,,1,5,8,0.031231163399934304,s/model
+numerical_frequency,numerical_4threads,,1,5,9,0.030817423800181133,s/model
+numerical_frequency,numerical_4threads,,1,6,0,0.030488340799638535,s/model
+numerical_frequency,numerical_4threads,,1,6,1,0.030336361499212216,s/model
+numerical_frequency,numerical_4threads,,1,6,2,0.031149767398892435,s/model
+numerical_frequency,numerical_4threads,,1,6,3,0.03135216609953204,s/model
+numerical_frequency,numerical_4threads,,1,6,4,0.031101213200599886,s/model
+numerical_frequency,numerical_4threads,,1,6,5,0.03085330430039903,s/model
+numerical_frequency,numerical_4threads,,1,6,6,0.03150484030047664,s/model
+numerical_frequency,numerical_4threads,,1,6,7,0.031091717899835204,s/model
+numerical_frequency,numerical_4threads,,1,6,8,0.031687616399722174,s/model
+numerical_frequency,numerical_4threads,,1,6,9,0.031184031200245953,s/model
+numerical_frequency,numerical_4threads,,1,7,0,0.0320778228007839,s/model
+numerical_frequency,numerical_4threads,,1,7,1,0.031494113498774824,s/model
+numerical_frequency,numerical_4threads,,1,7,2,0.03159443780023139,s/model
+numerical_frequency,numerical_4threads,,1,7,3,0.03226688079885207,s/model
+numerical_frequency,numerical_4threads,,1,7,4,0.031653971500054466,s/model
+numerical_frequency,numerical_4threads,,1,7,5,0.031181175899109802,s/model
+numerical_frequency,numerical_4threads,,1,7,6,0.031109261499659625,s/model
+numerical_frequency,numerical_4threads,,1,7,7,0.03094349579914706,s/model
+numerical_frequency,numerical_4threads,,1,7,8,0.031669952999800445,s/model
+numerical_frequency,numerical_4threads,,1,7,9,0.03052798839926254,s/model
+numerical_frequency,numerical_4threads,,1,8,0,0.03071107449941337,s/model
+numerical_frequency,numerical_4threads,,1,8,1,0.03116943839995656,s/model
+numerical_frequency,numerical_4threads,,1,8,2,0.03207315219915472,s/model
+numerical_frequency,numerical_4threads,,1,8,3,0.031928315399272836,s/model
+numerical_frequency,numerical_4threads,,1,8,4,0.031560676799563224,s/model
+numerical_frequency,numerical_4threads,,1,8,5,0.031116999700316228,s/model
+numerical_frequency,numerical_4threads,,1,8,6,0.03030180250061676,s/model
+numerical_frequency,numerical_4threads,,1,8,7,0.0302358949003974,s/model
+numerical_frequency,numerical_4threads,,1,8,8,0.030683033599052577,s/model
+numerical_frequency,numerical_4threads,,1,8,9,0.03204779390071053,s/model
+numerical_frequency,numerical_4threads,,1,9,0,0.03224101369996788,s/model
+numerical_frequency,numerical_4threads,,1,9,1,0.03073678249929799,s/model
+numerical_frequency,numerical_4threads,,1,9,2,0.030888880899874495,s/model
+numerical_frequency,numerical_4threads,,1,9,3,0.03173986370093189,s/model
+numerical_frequency,numerical_4threads,,1,9,4,0.03172054539900273,s/model
+numerical_frequency,numerical_4threads,,1,9,5,0.032139946799725296,s/model
+numerical_frequency,numerical_4threads,,1,9,6,0.03117520859959768,s/model
+numerical_frequency,numerical_4threads,,1,9,7,0.031513948600331784,s/model
+numerical_frequency,numerical_4threads,,1,9,8,0.032118278100097084,s/model
+numerical_frequency,numerical_4threads,,1,9,9,0.030154437499004417,s/model
+numerical_frequency,numerical_4threads,,1,10,0,0.031463833099405744,s/model
+numerical_frequency,numerical_4threads,,1,10,1,0.03041269539971836,s/model
+numerical_frequency,numerical_4threads,,1,10,2,0.031199022200598846,s/model
+numerical_frequency,numerical_4threads,,1,10,3,0.031118057398998644,s/model
+numerical_frequency,numerical_4threads,,1,10,4,0.031558278101147155,s/model
+numerical_frequency,numerical_4threads,,1,10,5,0.031139213401183953,s/model
+numerical_frequency,numerical_4threads,,1,10,6,0.031491784400714096,s/model
+numerical_frequency,numerical_4threads,,1,10,7,0.03033459649886936,s/model
+numerical_frequency,numerical_4threads,,1,10,8,0.03165756320086075,s/model
+numerical_frequency,numerical_4threads,,1,10,9,0.030691822301014325,s/model
+numerical_frequency,numerical_4threads,,1,11,0,0.03074245919997338,s/model
+numerical_frequency,numerical_4threads,,1,11,1,0.031399672200495846,s/model
+numerical_frequency,numerical_4threads,,1,11,2,0.03088384049915476,s/model
+numerical_frequency,numerical_4threads,,1,11,3,0.031419429898960516,s/model
+numerical_frequency,numerical_4threads,,1,11,4,0.0316775516999769,s/model
+numerical_frequency,numerical_4threads,,1,11,5,0.031222020499990323,s/model
+numerical_frequency,numerical_4threads,,1,11,6,0.0315221005002968,s/model
+numerical_frequency,numerical_4threads,,1,11,7,0.03105852419976145,s/model
+numerical_frequency,numerical_4threads,,1,11,8,0.032583493299898694,s/model
+numerical_frequency,numerical_4threads,,1,11,9,0.03260607819975121,s/model
+numerical_frequency,numerical_4threads,,1,12,0,0.031283968199568336,s/model
+numerical_frequency,numerical_4threads,,1,12,1,0.033383125399996064,s/model
+numerical_frequency,numerical_4threads,,1,12,2,0.033263932999398095,s/model
+numerical_frequency,numerical_4threads,,1,12,3,0.03246032250026474,s/model
+numerical_frequency,numerical_4threads,,1,12,4,0.03175510500004748,s/model
+numerical_frequency,numerical_4threads,,1,12,5,0.03519399429933401,s/model
+numerical_frequency,numerical_4threads,,1,12,6,0.033276859800389504,s/model
+numerical_frequency,numerical_4threads,,1,12,7,0.03403695430024527,s/model
+numerical_frequency,numerical_4threads,,1,12,8,0.034750426800746935,s/model
+numerical_frequency,numerical_4threads,,1,12,9,0.03378086409938987,s/model
+numerical_frequency,numerical_4threads,,1,13,0,0.03062976870132843,s/model
+numerical_frequency,numerical_4threads,,1,13,1,0.03375063580024289,s/model
+numerical_frequency,numerical_4threads,,1,13,2,0.03570007159869419,s/model
+numerical_frequency,numerical_4threads,,1,13,3,0.033501260199409445,s/model
+numerical_frequency,numerical_4threads,,1,13,4,0.03192541280004661,s/model
+numerical_frequency,numerical_4threads,,1,13,5,0.03504353809985332,s/model
+numerical_frequency,numerical_4threads,,1,13,6,0.03220695400086697,s/model
+numerical_frequency,numerical_4threads,,1,13,7,0.036417288100346924,s/model
+numerical_frequency,numerical_4threads,,1,13,8,0.03579689350008266,s/model
+numerical_frequency,numerical_4threads,,1,13,9,0.03188491009932477,s/model
+numerical_frequency,numerical_4threads,,1,14,0,0.034213652499602176,s/model
+numerical_frequency,numerical_4threads,,1,14,1,0.03067396170081338,s/model
+numerical_frequency,numerical_4threads,,1,14,2,0.03216454909997992,s/model
+numerical_frequency,numerical_4threads,,1,14,3,0.031237862900889014,s/model
+numerical_frequency,numerical_4threads,,1,14,4,0.03159819559950847,s/model
+numerical_frequency,numerical_4threads,,1,14,5,0.03419600339984754,s/model
+numerical_frequency,numerical_4threads,,1,14,6,0.03479256989958231,s/model
+numerical_frequency,numerical_4threads,,1,14,7,0.03349179020005977,s/model
+numerical_frequency,numerical_4threads,,1,14,8,0.032708913399255836,s/model
+numerical_frequency,numerical_4threads,,1,14,9,0.03256126560008852,s/model
+numerical_frequency,numerical_4threads,,1,15,0,0.03248974729940528,s/model
+numerical_frequency,numerical_4threads,,1,15,1,0.03046965329995146,s/model
+numerical_frequency,numerical_4threads,,1,15,2,0.03017210200050613,s/model
+numerical_frequency,numerical_4threads,,1,15,3,0.030679518300166818,s/model
+numerical_frequency,numerical_4threads,,1,15,4,0.0304770037997514,s/model
+numerical_frequency,numerical_4threads,,1,15,5,0.03078886790026445,s/model
+numerical_frequency,numerical_4threads,,1,15,6,0.030679313100699802,s/model
+numerical_frequency,numerical_4threads,,1,15,7,0.030646532599348575,s/model
+numerical_frequency,numerical_4threads,,1,15,8,0.03149382970004808,s/model
+numerical_frequency,numerical_4threads,,1,15,9,0.0313903523987392,s/model
+numerical_frequency,numerical_4threads,,1,16,0,0.032504601000982805,s/model
+numerical_frequency,numerical_4threads,,1,16,1,0.030729110399261118,s/model
+numerical_frequency,numerical_4threads,,1,16,2,0.031081420100235846,s/model
+numerical_frequency,numerical_4threads,,1,16,3,0.0308049885003129,s/model
+numerical_frequency,numerical_4threads,,1,16,4,0.03128741350083146,s/model
+numerical_frequency,numerical_4threads,,1,16,5,0.031043033600144553,s/model
+numerical_frequency,numerical_4threads,,1,16,6,0.030923028400866314,s/model
+numerical_frequency,numerical_4threads,,1,16,7,0.03086189980094787,s/model
+numerical_frequency,numerical_4threads,,1,16,8,0.03128925330092898,s/model
+numerical_frequency,numerical_4threads,,1,16,9,0.03182439380034339,s/model

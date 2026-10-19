@@ -5,13 +5,13 @@ from __future__ import annotations
 import torch
 from torch.utils.data import DataLoader
 
-from dataset.prodiff_dataset import HelmholtzDiffusionDataset
+from dataset.operator_dataset import HelmholtzOperatorDataset
 from .config import resolve_path
 
 
 def build_dataset(config: dict, split: str):
     root = resolve_path(config["data"][f"{split}_root"])
-    return HelmholtzDiffusionDataset(root, config["data"]["frequencies_hz"])
+    return HelmholtzOperatorDataset(root, config["data"]["frequencies_hz"])
 
 
 def make_loader(dataset, batch_size: int, shuffle: bool, workers: int) -> DataLoader:

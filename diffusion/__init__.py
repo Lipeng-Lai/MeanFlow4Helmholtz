@@ -1,6 +1,5 @@
-"""Gaussian diffusion components used by the GNO experiment."""
+"""Diffusion utilities for the conditional GNO."""
 
 from .gaussian import GaussianDiffusion
-from .sampling import ddim_sample
 
-__all__ = ["GaussianDiffusion", "ddim_sample"]
+__all__ = ["GaussianDiffusion"]

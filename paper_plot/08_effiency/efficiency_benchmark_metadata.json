@@ -1,0 +1,150 @@
+{
+  "completed_at_utc": "2026-10-19T08:14:48.537320+00:00",
+  "python": "3.10.18 (main, Jun  5 2025, 13:14:17) [GCC 11.2.0]",
+  "python_executable": "/home/llp/miniconda3/envs/forward_test/bin/python",
+  "torch": "2.8.0+cu128",
+  "cuda": "12.8",
+  "device": "cuda",
+  "gpu": "NVIDIA GeForce RTX 5070",
+  "cpu": "Intel(R) Core(TM) i9-14900KF",
+  "torch_cpu_threads": 4,
+  "numerical_cpu_threads": [
+    1,
+    4
+  ],
+  "numerical_threadpools": {
+    "1": [
+      {
+        "user_api": "blas",
+        "internal_api": "openblas",
+        "num_threads": 1,
+        "prefix": "libscipy_openblas",
+        "filepath": "/home/llp/.local/lib/python3.10/site-packages/numpy.libs/libscipy_openblas64_-56d6093b.so",
+        "version": "0.3.29",
+        "threading_layer": "pthreads",
+        "architecture": "Haswell"
+      },
+      {
+        "user_api": "openmp",
+        "internal_api": "openmp",
+        "num_threads": 1,
+        "prefix": "libgomp",
+        "filepath": "/home/llp/miniconda3/envs/forward_test/lib/python3.10/site-packages/torch/lib/libgomp.so.1",
+        "version": null
+      },
+      {
+        "user_api": "blas",
+        "internal_api": "openblas",
+        "num_threads": 1,
+        "prefix": "libscipy_openblas",
+        "filepath": "/home/llp/.local/lib/python3.10/site-packages/scipy.libs/libscipy_openblas-68440149.so",
+        "version": "0.3.28",
+        "threading_layer": "pthreads",
+        "architecture": "Haswell"
+      }
+    ],
+    "4": [
+      {
+        "user_api": "blas",
+        "internal_api": "openblas",
+        "num_threads": 4,
+        "prefix": "libscipy_openblas",
+        "filepath": "/home/llp/.local/lib/python3.10/site-packages/numpy.libs/libscipy_openblas64_-56d6093b.so",
+        "version": "0.3.29",
+        "threading_layer": "pthreads",
+        "architecture": "Haswell"
+      },
+      {
+        "user_api": "openmp",
+        "internal_api": "openmp",
+        "num_threads": 4,
+        "prefix": "libgomp",
+        "filepath": "/home/llp/miniconda3/envs/forward_test/lib/python3.10/site-packages/torch/lib/libgomp.so.1",
+        "version": null
+      },
+      {
+        "user_api": "blas",
+        "internal_api": "openblas",
+        "num_threads": 4,
+        "prefix": "libscipy_openblas",
+        "filepath": "/home/llp/.local/lib/python3.10/site-packages/scipy.libs/libscipy_openblas-68440149.so",
+        "version": "0.3.28",
+        "threading_layer": "pthreads",
+        "architecture": "Haswell"
+      }
+    ]
+  },
+  "warmup_runs": 3,
+  "timed_runs": 10,
+  "aggregation": "median of repeated synchronized wall-clock measurements",
+  "model_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "source_index": 0,
+  "source_position_zx": [
+    2,
+    21
+  ],
+  "dataset_split": "val",
+  "frequencies_hz": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16
+  ],
+  "sampling_steps": [
+    1,
+    2,
+    4,
+    8
+  ],
+  "panel_a": {
+    "frequency_hz": 12,
+    "batch_size": 10,
+    "methods": [
+      "fno",
+      "diffusion",
+      "meanflow"
+    ],
+    "fno_steps": [
+      1
+    ]
+  },
+  "panel_b": {
+    "meanflow_steps": 1,
+    "numerical_cpu_threads": [
+      1,
+      4
+    ],
+    "speedup": "each numerical baseline median divided by Mean Flows median",
+    "batch_axis": "frequencies for one velocity model; one sampler call per model and count",
+    "numerical": "sequential independent CPU frequency solves; sum frequency times within each repetition, then take median",
+    "time_unit": "seconds per velocity model"
+  },
+  "learned_timing_scope": "inference on pre-normalized device-resident inputs; excludes checkpoint loading, input generation, transfers, encoding and output decoding",
+  "numerical_timing_scope": "CPU solver including field/operator assembly, factorization, solve, finite-output and residual checks",
+  "checkpoint_configs": {
+    "fno": "/home/llp/data/Helmholtz/MeanFlow4Helmholtz/checkpoint/fno/config.yaml",
+    "diffusion": "/home/llp/data/Helmholtz/MeanFlow4Helmholtz/checkpoint/gno_ema999/config.yaml",
+    "meanflow": "/home/llp/data/Helmholtz/MeanFlow4Helmholtz/checkpoint/meanflow_improved_ema999/config.yaml"
+  }
+}

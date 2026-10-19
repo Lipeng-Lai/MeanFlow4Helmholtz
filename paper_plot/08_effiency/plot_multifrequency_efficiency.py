@@ -1,19 +1,29 @@
-"""Benchmark cumulative multi-frequency runtime, following paper Figure 12."""
+"""Benchmark inference steps and parallel 3--16 Hz Mean Flows generation.
+
+Panel (a) times a ten-model batch at 12 Hz. Panel (b) batches frequencies for each velocity model in a single
+Mean Flows call and compares with sequential CPU Helmholtz solves at one and four threads.
+All reported timings are medians of ten timed runs after three warm-up runs.
+FNO is a direct operator and appears only at one step in panel (a).
+"""
 
 from __future__ import annotations
 
 import argparse
 import csv
 import importlib.util
+import json
+import platform
 import statistics
 import sys
 import time
 from pathlib import Path
+from datetime import datetime, timezone
 
 import matplotlib.pyplot as plt
 import numpy as np
 import torch
 import yaml
+from threadpoolctl import threadpool_info, threadpool_limits
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -21,27 +31,35 @@ OUTPUT_DIR = Path(__file__).resolve().parent
 OUTPUT_STEM = OUTPUT_DIR / "multifrequency_efficiency"
 DETAILS_CSV = OUTPUT_DIR / "multifrequency_efficiency.csv"
 SAMPLING_CSV = OUTPUT_DIR / "sampling_step_efficiency.csv"
+RAW_CSV = OUTPUT_DIR / "efficiency_timing_runs.csv"
+METADATA_PATH = OUTPUT_DIR / "efficiency_benchmark_metadata.json"
 DATA_CONFIG = "configs/gno_ema999.yaml"
 
-METHODS = ("diffusion", "meanflow")
-FREQUENCIES_HZ = tuple(range(8, 18))
+METHODS = ("fno", "diffusion", "meanflow")
+FREQUENCIES_HZ = tuple(range(3, 17))
 FREQUENCY_COUNTS = tuple(range(1, len(FREQUENCIES_HZ) + 1))
-SAMPLING_STEPS = (1, 2, 5, 10)
+SAMPLING_STEPS = (1, 2, 4, 8)
 FIXED_SAMPLING_FREQUENCY_HZ = 12
 MODEL_INDICES = tuple(range(10))
 SOURCE_INDEX = 0
 MULTIFREQUENCY_SAMPLING_STEPS = 1
-WARMUP_RUNS = 1
-TIMED_RUNS = 5
+WARMUP_RUNS = 3
+TIMED_RUNS = 10
 CPU_THREADS = 4
+NUMERICAL_THREADS = (1, 4)
+TIMING_RECORDS: list[dict] = []
 
 COLORS = {
     "diffusion": "#0072B2",
     "meanflow": "#D55E00",
     "numerical": "#009E73",
+    "fno": "#009E73",
+    "numerical_4threads": "#0072B2",
     "speedup": "#D62728",
+    "speedup_4threads": "#CC79A7",
 }
 DISPLAY_NAMES = {
+    "fno": "FNO",
     "diffusion": "Diffusion",
     "meanflow": "Mean Flows",
 }
@@ -74,7 +92,7 @@ def _load_cases(
     split_root = resolve_path(data_config["data"]["val_root"])
     velocity_all = np.load(split_root / "data" / "velocity.npy", mmap_mode="r")
 
-    with (ROOT / "configs" / "generate_helmholtz.yaml").open(
+    with (ROOT / "configs" / "generate_dataset.yaml").open(
         encoding="utf-8"
     ) as file:
         generation_config = yaml.safe_load(file)
@@ -155,6 +173,8 @@ def _measure_learned_counts(
 
     def run_count(frequency_count: int) -> None:
         for condition, noise in batches:
+            # The leading dimension contains all requested frequencies for
+            # ONE model. Do not loop over individual frequencies here.
             BENCHMARK._sample(
                 method,
                 model,
@@ -171,7 +191,7 @@ def _measure_learned_counts(
         BENCHMARK._synchronize(device)
 
         measurements = []
-        for _ in range(timed_runs):
+        for repeat in range(timed_runs):
             BENCHMARK._synchronize(device)
             started = time.perf_counter()
             run_count(frequency_count)
@@ -179,10 +199,16 @@ def _measure_learned_counts(
             measurements.append(
                 (time.perf_counter() - started) / model_count
             )
-        results[frequency_count] = statistics.mean(measurements)
+            TIMING_RECORDS.append({
+                "benchmark": "parallel_frequencies", "method": method,
+                "sampling_steps": MULTIFREQUENCY_SAMPLING_STEPS,
+                "frequency_count": frequency_count, "frequency_hz": "",
+                "repeat": repeat, "seconds": measurements[-1], "unit": "s/model",
+            })
+        results[frequency_count] = statistics.median(measurements)
         print(
             f"{method}, frequencies={frequency_count}: "
-            f"mean={results[frequency_count]:.6f} s/model"
+            f"median={results[frequency_count]:.6f} s/model"
         )
     return results
 
@@ -206,7 +232,8 @@ def _measure_sampling_steps(
     )
     results: dict[int, float] = {}
 
-    for sampling_steps in SAMPLING_STEPS:
+    steps = (1,) if method == "fno" else SAMPLING_STEPS
+    for sampling_steps in steps:
         for _ in range(warmup_runs):
             BENCHMARK._sample(
                 method,
@@ -220,7 +247,7 @@ def _measure_sampling_steps(
         BENCHMARK._synchronize(device)
 
         measurements = []
-        for _ in range(timed_runs):
+        for repeat in range(timed_runs):
             BENCHMARK._synchronize(device)
             started = time.perf_counter()
             BENCHMARK._sample(
@@ -234,12 +261,49 @@ def _measure_sampling_steps(
             )
             BENCHMARK._synchronize(device)
             measurements.append(time.perf_counter() - started)
-        results[sampling_steps] = statistics.mean(measurements)
+            TIMING_RECORDS.append({
+                "benchmark": "sampling_steps", "method": method,
+                "sampling_steps": sampling_steps, "frequency_count": 1,
+                "frequency_hz": FIXED_SAMPLING_FREQUENCY_HZ,
+                "repeat": repeat, "seconds": measurements[-1], "unit": "s/10-model batch",
+            })
+        results[sampling_steps] = statistics.median(measurements)
         print(
             f"{method}, sampling_steps={sampling_steps}: "
-            f"mean={results[sampling_steps] * 1000.0:.3f} ms/10-model batch"
+            f"median={results[sampling_steps] * 1000.0:.3f} ms/10-model batch"
         )
     return results
+
+
+def _solve_numerical_case(
+    case: dict,
+    generation_config: dict,
+    source_position: tuple[int, int],
+) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    solver_config = {**generation_config["solver"], "device": "cpu"}
+    result = solve_scattered_wavefields(
+        velocity_km_s=case["velocity"],
+        source_positions_rc=[source_position],
+        frequency_hz=case["frequency_hz"],
+        background_velocity_km_s=float(
+            generation_config["physics"]["background_velocity_km_s"]
+        ),
+        spacing_km=tuple(generation_config["grid"]["spacing_km"]),
+        solver_config=solver_config,
+        singularity_radius_cells=float(
+            generation_config["source"].get("singularity_radius_cells", 0.5)
+        ),
+    )
+    residuals = result[2]
+    tolerance = float(solver_config["relative_residual_tolerance"])
+    if not all(np.isfinite(array).all() for array in result):
+        raise RuntimeError(f"CPU numerical solver returned non-finite values")
+    if float(np.max(residuals)) > tolerance:
+        raise RuntimeError(
+            f"CPU numerical residual {np.max(residuals):.3e} "
+            f"exceeds tolerance {tolerance:.3e}"
+        )
+    return result
 
 
 def _measure_numerical_frequencies(
@@ -248,66 +312,55 @@ def _measure_numerical_frequencies(
     source_position: tuple[int, int],
     warmup_runs: int,
     timed_runs: int,
+    threads: int,
 ) -> tuple[dict[float, float], dict[int, float]]:
-    solver_config = generation_config["solver"]
-    residual_tolerance = float(solver_config["relative_residual_tolerance"])
     model_count = len(cases_by_model)
     per_frequency: dict[float, float] = {}
+    frequency_measurements: list[list[float]] = []
 
     def solve_frequency(frequency_index: int) -> None:
         for model_cases in cases_by_model:
             case = model_cases[frequency_index]
-            _, _, residuals = solve_scattered_wavefields(
-                velocity_km_s=case["velocity"],
-                source_positions_rc=[source_position],
-                frequency_hz=case["frequency_hz"],
-                background_velocity_km_s=float(
-                    generation_config["physics"]["background_velocity_km_s"]
-                ),
-                spacing_km=tuple(generation_config["grid"]["spacing_km"]),
-                solver_config=solver_config,
-                singularity_radius_cells=float(
-                    generation_config["source"].get(
-                        "singularity_radius_cells", 0.5
-                    )
-                ),
-            )
-            if float(np.max(residuals)) > residual_tolerance:
-                raise RuntimeError(
-                    f"numerical residual {np.max(residuals):.3e} exceeds "
-                    f"tolerance {residual_tolerance:.3e}"
-                )
+            _solve_numerical_case(case, generation_config, source_position)
 
     for frequency_index, frequency_hz in enumerate(FREQUENCIES_HZ):
         for _ in range(warmup_runs):
             solve_frequency(frequency_index)
 
         measurements = []
-        for _ in range(timed_runs):
+        for repeat in range(timed_runs):
             started = time.perf_counter()
             solve_frequency(frequency_index)
             measurements.append(
                 (time.perf_counter() - started) / model_count
             )
-        per_frequency[float(frequency_hz)] = statistics.mean(measurements)
+            TIMING_RECORDS.append({
+                "benchmark": "numerical_frequency", "method": f"numerical_{threads}threads",
+                "sampling_steps": "", "frequency_count": 1,
+                "frequency_hz": frequency_hz, "repeat": repeat,
+                "seconds": measurements[-1], "unit": "s/model",
+            })
+        frequency_measurements.append(measurements)
+        per_frequency[float(frequency_hz)] = statistics.median(measurements)
         print(
-            f"numerical, frequency={frequency_hz} Hz: "
-            f"mean={per_frequency[float(frequency_hz)]:.6f} s/model"
+            f"numerical ({threads} threads), frequency={frequency_hz} Hz: "
+            f"median={per_frequency[float(frequency_hz)]:.6f} s/model"
         )
 
     cumulative: dict[int, float] = {}
-    running_total = 0.0
-    for frequency_count, frequency_hz in zip(
-        FREQUENCY_COUNTS, FREQUENCIES_HZ
-    ):
-        running_total += per_frequency[float(frequency_hz)]
-        cumulative[frequency_count] = running_total
+    # Sum each repetition's frequency times before taking the median, so
+    # cumulative timings also represent medians of the timed frequency sets.
+    for count in FREQUENCY_COUNTS:
+        cumulative[count] = statistics.median(
+            sum(values[repeat] for values in frequency_measurements[:count])
+            for repeat in range(timed_runs)
+        )
     return per_frequency, cumulative
 
 
 def _write_csv(
     meanflow: dict[int, float],
-    numerical: dict[int, float],
+    numerical: dict[int, dict[int, float]],
     sampling: dict[str, dict[int, float]],
 ) -> None:
     with DETAILS_CSV.open("w", newline="", encoding="utf-8") as file:
@@ -317,19 +370,22 @@ def _write_csv(
                 "frequency_count",
                 "frequency_range_hz",
                 "meanflow_time_s",
-                "numerical_time_s",
-                "meanflow_speedup",
+                "numerical_1thread_time_s",
+                "numerical_4threads_time_s",
+                "meanflow_speedup_vs_1thread",
+                "meanflow_speedup_vs_4threads",
             ]
         )
         for count in FREQUENCY_COUNTS:
-            numerical_time = numerical[count]
             writer.writerow(
                 [
                     count,
                     f"{FREQUENCIES_HZ[0]}-{FREQUENCIES_HZ[count - 1]}",
                     meanflow[count],
-                    numerical_time,
-                    numerical_time / meanflow[count],
+                    numerical[1][count],
+                    numerical[4][count],
+                    numerical[1][count] / meanflow[count],
+                    numerical[4][count] / meanflow[count],
                 ]
             )
     print(f"saved: {DETAILS_CSV}")
@@ -337,17 +393,24 @@ def _write_csv(
     with SAMPLING_CSV.open("w", newline="", encoding="utf-8") as file:
         writer = csv.writer(file)
         writer.writerow(
-            ["sampling_steps", "diffusion_time_ms", "meanflow_time_ms"]
+            ["sampling_steps", "fno_time_ms", "diffusion_time_ms", "meanflow_time_ms"]
         )
         for sampling_steps in SAMPLING_STEPS:
             writer.writerow(
                 [
                     sampling_steps,
+                    sampling["fno"][1] * 1000.0 if sampling_steps == 1 else "",
                     sampling["diffusion"][sampling_steps] * 1000.0,
                     sampling["meanflow"][sampling_steps] * 1000.0,
                 ]
             )
     print(f"saved: {SAMPLING_CSV}")
+
+    with RAW_CSV.open("w", newline="", encoding="utf-8") as file:
+        writer = csv.DictWriter(file, fieldnames=list(TIMING_RECORDS[0]))
+        writer.writeheader()
+        writer.writerows(TIMING_RECORDS)
+    print(f"saved: {RAW_CSV}")
 
 
 def _configure_style() -> None:
@@ -368,27 +431,26 @@ def _configure_style() -> None:
 
 def _plot(
     meanflow: dict[int, float],
-    numerical: dict[int, float],
+    numerical: dict[int, dict[int, float]],
     sampling: dict[str, dict[int, float]],
 ) -> None:
     _configure_style()
     fig, axes = plt.subplots(1, 2, figsize=(11.5, 4.2))
 
     positions = np.arange(len(SAMPLING_STEPS))
-    bar_width = 0.34
+    bar_width = 0.25
     maximum = max(
-        sampling[method][sampling_steps] * 1000.0
+        value * 1000.0
         for method in METHODS
-        for sampling_steps in SAMPLING_STEPS
+        for value in sampling[method].values()
     )
     for method in METHODS:
-        values = [
-            sampling[method][sampling_steps] * 1000.0
-            for sampling_steps in SAMPLING_STEPS
-        ]
-        offset = -bar_width / 2 if method == "diffusion" else bar_width / 2
+        plotted_steps = (1,) if method == "fno" else SAMPLING_STEPS
+        values = [sampling[method][steps] * 1000.0 for steps in plotted_steps]
+        offset = (METHODS.index(method) - (len(METHODS) - 1) / 2) * bar_width
+        bar_positions = np.array([SAMPLING_STEPS.index(steps) for steps in plotted_steps]) + offset
         bars = axes[0].bar(
-            positions + offset,
+            bar_positions,
             values,
             width=bar_width,
             color=COLORS[method],
@@ -419,10 +481,8 @@ def _plot(
     axes[0].legend(frameon=False, loc="upper left")
 
     counts = list(FREQUENCY_COUNTS)
-    numerical_values = [numerical[count] for count in counts]
 
     meanflow_values = [meanflow[count] for count in counts]
-    speedups = [numerical[count] / meanflow[count] for count in counts]
     speed_ax = axes[1].twinx()
     meanflow_line = axes[1].plot(
         counts,
@@ -433,29 +493,31 @@ def _plot(
         markersize=4,
         label=DISPLAY_NAMES["meanflow"],
     )[0]
-    numerical_line = axes[1].plot(
-        counts,
-        numerical_values,
-        color=COLORS["numerical"],
-        linewidth=2.0,
-        marker="o",
-        markersize=4,
-        label="Numerical simulation",
-    )[0]
-    speedup_line = speed_ax.plot(
-        counts,
-        speedups,
-        color=COLORS["speedup"],
-        linewidth=1.6,
-        linestyle="--",
-        label="Speed-up",
-    )[0]
+    numerical_lines = []
+    speedup_lines = []
+    for threads, color, speed_color, marker, dash in (
+        (1, COLORS["numerical"], COLORS["speedup"], "o", "--"),
+        (4, COLORS["numerical_4threads"], COLORS["speedup_4threads"], "s", "-."),
+    ):
+        thread_label = "1 thread" if threads == 1 else "4 threads"
+        numerical_lines.append(axes[1].plot(
+            counts,
+            [numerical[threads][count] for count in counts],
+            color=color, linewidth=2.0, marker=marker, markersize=4,
+            label=f"Numerical Simulation ({thread_label})",
+        )[0])
+        speedup_lines.append(speed_ax.plot(
+            counts,
+            [numerical[threads][count] / meanflow[count] for count in counts],
+            color=speed_color, linewidth=1.6, linestyle=dash,
+            label=f"Speed Up ({thread_label})",
+        )[0])
     axes[1].set_xlabel("Number of frequencies")
     axes[1].set_ylabel("Elapsed time (s)")
     axes[1].set_xticks(counts)
-    speed_ax.set_ylabel("Speed-up ratio")
+    speed_ax.set_ylabel("Speed Up ratio")
     axes[1].legend(
-        handles=[meanflow_line, numerical_line, speedup_line],
+        handles=[meanflow_line, *numerical_lines, *speedup_lines],
         frameon=False,
         loc="upper left",
     )
@@ -492,7 +554,7 @@ def parse_args() -> argparse.Namespace:
         "--threads",
         type=int,
         default=CPU_THREADS,
-        help="Torch CPU thread count used for reproducible timing.",
+        help="Torch CPU thread limit; numerical baselines always use 1 and 4 threads.",
     )
     return parser.parse_args()
 
@@ -501,6 +563,8 @@ def main() -> None:
     args = parse_args()
     if args.warmup < 0 or args.runs < 1:
         raise ValueError("--warmup must be non-negative and --runs must be positive")
+    if args.threads < 1:
+        raise ValueError("--threads must be positive")
 
     device = torch.device(args.device)
     if device.type == "cuda" and not torch.cuda.is_available():
@@ -512,10 +576,10 @@ def main() -> None:
     print(f"device: {device}")
     if device.type == "cuda":
         print(f"GPU: {torch.cuda.get_device_name(device)}")
-    if device.type == "cpu":
-        if args.threads < 1:
-            raise ValueError("--threads must be positive")
-        torch.set_num_threads(args.threads)
+    torch.set_num_threads(args.threads)
+    TIMING_RECORDS.clear()
+    print(f"frequency range: {FREQUENCIES_HZ[0]}--{FREQUENCIES_HZ[-1]} Hz, batched per model")
+    print(f"warmup={args.warmup}, runs={args.runs}, CPU threads={args.threads}")
     BENCHMARK.seed_everything(42)
 
     cases_by_model, generation_config, source_position = _load_cases(device)
@@ -540,16 +604,53 @@ def main() -> None:
         if device.type == "cuda":
             torch.cuda.empty_cache()
 
-    _, numerical = _measure_numerical_frequencies(
-        cases_by_model,
-        generation_config,
-        source_position,
-        args.warmup,
-        args.runs,
-    )
+    numerical: dict[int, dict[int, float]] = {}
+    numerical_threadpools = {}
+    for threads in NUMERICAL_THREADS:
+        with threadpool_limits(limits=threads):
+            numerical_threadpools[str(threads)] = threadpool_info()
+            _, numerical[threads] = _measure_numerical_frequencies(
+                cases_by_model,
+                generation_config,
+                source_position,
+                args.warmup,
+                args.runs,
+                threads,
+            )
     if meanflow is None:
         raise RuntimeError("Mean Flows timings were not collected")
     _write_csv(meanflow, numerical, sampling)
+    cpu_model = platform.processor()
+    cpuinfo = Path("/proc/cpuinfo")
+    if cpuinfo.exists():
+        cpu_model = next((line.split(":", 1)[1].strip() for line in cpuinfo.read_text().splitlines()
+                          if line.startswith("model name")), cpu_model)
+    metadata = {
+        "completed_at_utc": datetime.now(timezone.utc).isoformat(),
+        "python": sys.version, "python_executable": sys.executable,
+        "torch": torch.__version__, "cuda": torch.version.cuda,
+        "device": str(device), "gpu": torch.cuda.get_device_name(device) if device.type == "cuda" else None,
+        "cpu": cpu_model, "torch_cpu_threads": args.threads,
+        "numerical_cpu_threads": NUMERICAL_THREADS,
+        "numerical_threadpools": numerical_threadpools,
+        "warmup_runs": args.warmup, "timed_runs": args.runs,
+        "aggregation": "median of repeated synchronized wall-clock measurements",
+        "model_indices": MODEL_INDICES, "source_index": SOURCE_INDEX,
+        "source_position_zx": source_position, "dataset_split": "val",
+        "frequencies_hz": FREQUENCIES_HZ, "sampling_steps": SAMPLING_STEPS,
+        "panel_a": {"frequency_hz": FIXED_SAMPLING_FREQUENCY_HZ, "batch_size": len(MODEL_INDICES), "methods": list(METHODS), "fno_steps": [1]},
+        "panel_b": {"meanflow_steps": MULTIFREQUENCY_SAMPLING_STEPS,
+                    "numerical_cpu_threads": NUMERICAL_THREADS,
+                    "speedup": "each numerical baseline median divided by Mean Flows median",
+                    "batch_axis": "frequencies for one velocity model; one sampler call per model and count",
+                    "numerical": "sequential independent CPU frequency solves; sum frequency times within each repetition, then take median",
+                    "time_unit": "seconds per velocity model"},
+        "learned_timing_scope": "inference on pre-normalized device-resident inputs; excludes checkpoint loading, input generation, transfers, encoding and output decoding",
+        "numerical_timing_scope": "CPU solver including field/operator assembly, factorization, solve, finite-output and residual checks",
+        "checkpoint_configs": {name: str(path) for name, path in BENCHMARK.CHECKPOINT_CONFIGS.items()},
+    }
+    METADATA_PATH.write_text(json.dumps(metadata, indent=2) + "\n", encoding="utf-8")
+    print(f"saved: {METADATA_PATH}")
     _plot(meanflow, numerical, sampling)
 
 

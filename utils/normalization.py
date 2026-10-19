@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import numpy as np
 import torch
-from dataset.prodiff_dataset import load_or_compute_normalization
+from dataset.operator_dataset import load_or_compute_normalization
 from .config import resolve_path
 
 

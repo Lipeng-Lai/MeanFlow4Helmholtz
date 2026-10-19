@@ -1,0 +1,746 @@
+{
+  "python": "/home/llp/miniconda3/envs/forward_test/bin/python",
+  "initial_threadpools": [
+    {
+      "user_api": "blas",
+      "internal_api": "openblas",
+      "num_threads": 32,
+      "prefix": "libscipy_openblas",
+      "filepath": "/home/llp/.local/lib/python3.10/site-packages/numpy.libs/libscipy_openblas64_-56d6093b.so",
+      "version": "0.3.29",
+      "threading_layer": "pthreads",
+      "architecture": "Haswell"
+    },
+    {
+      "user_api": "blas",
+      "internal_api": "openblas",
+      "num_threads": 32,
+      "prefix": "libscipy_openblas",
+      "filepath": "/home/llp/.local/lib/python3.10/site-packages/scipy.libs/libscipy_openblas-68440149.so",
+      "version": "0.3.28",
+      "threading_layer": "pthreads",
+      "architecture": "Haswell"
+    }
+  ],
+  "conditions": [
+    {
+      "dataset": "old",
+      "frequencies_hz": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "blas_threads": 32,
+      "warmup_runs": 1,
+      "timed_runs": 3,
+      "seconds_per_model": [
+        0.9121382407000056,
+        0.903546677599661,
+        0.8901879972996539
+      ],
+      "median_s": 0.903546677599661,
+      "mean_s": 0.9019576385331068,
+      "max_residual": 9.364159522636573e-14,
+      "threadpools": [
+        {
+          "user_api": "blas",
+          "internal_api": "openblas",
+          "num_threads": 32,
+          "prefix": "libscipy_openblas",
+          "filepath": "/home/llp/.local/lib/python3.10/site-packages/numpy.libs/libscipy_openblas64_-56d6093b.so",
+          "version": "0.3.29",
+          "threading_layer": "pthreads",
+          "architecture": "Haswell"
+        },
+        {
+          "user_api": "blas",
+          "internal_api": "openblas",
+          "num_threads": 32,
+          "prefix": "libscipy_openblas",
+          "filepath": "/home/llp/.local/lib/python3.10/site-packages/scipy.libs/libscipy_openblas-68440149.so",
+          "version": "0.3.28",
+          "threading_layer": "pthreads",
+          "architecture": "Haswell"
+        }
+      ]
+    },
+    {
+      "dataset": "old",
+      "frequencies_hz": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "blas_threads": 4,
+      "warmup_runs": 1,
+      "timed_runs": 3,
+      "seconds_per_model": [
+        0.3714612023992231,
+        0.37868844470067414,
+        0.39081957519956634
+      ],
+      "median_s": 0.37868844470067414,
+      "mean_s": 0.3803230740998212,
+      "max_residual": 2.9815310947990077e-14,
+      "threadpools": [
+        {
+          "user_api": "blas",
+          "internal_api": "openblas",
+          "num_threads": 4,
+          "prefix": "libscipy_openblas",
+          "filepath": "/home/llp/.local/lib/python3.10/site-packages/numpy.libs/libscipy_openblas64_-56d6093b.so",
+          "version": "0.3.29",
+          "threading_layer": "pthreads",
+          "architecture": "Haswell"
+        },
+        {
+          "user_api": "blas",
+          "internal_api": "openblas",
+          "num_threads": 4,
+          "prefix": "libscipy_openblas",
+          "filepath": "/home/llp/.local/lib/python3.10/site-packages/scipy.libs/libscipy_openblas-68440149.so",
+          "version": "0.3.28",
+          "threading_layer": "pthreads",
+          "architecture": "Haswell"
+        }
+      ]
+    },
+    {
+      "dataset": "old",
+      "frequencies_hz": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "blas_threads": 32,
+      "warmup_runs": 1,
+      "timed_runs": 3,
+      "seconds_per_model": [
+        1.2158586720004678,
+        1.224470921100874,
+        1.0757743447000394
+      ],
+      "median_s": 1.2158586720004678,
+      "mean_s": 1.1720346459337938,
+      "max_residual": 9.364159522636573e-14,
+      "threadpools": [
+        {
+          "user_api": "blas",
+          "internal_api": "openblas",
+          "num_threads": 32,
+          "prefix": "libscipy_openblas",
+          "filepath": "/home/llp/.local/lib/python3.10/site-packages/numpy.libs/libscipy_openblas64_-56d6093b.so",
+          "version": "0.3.29",
+          "threading_layer": "pthreads",
+          "architecture": "Haswell"
+        },
+        {
+          "user_api": "blas",
+          "internal_api": "openblas",
+          "num_threads": 32,
+          "prefix": "libscipy_openblas",
+          "filepath": "/home/llp/.local/lib/python3.10/site-packages/scipy.libs/libscipy_openblas-68440149.so",
+          "version": "0.3.28",
+          "threading_layer": "pthreads",
+          "architecture": "Haswell"
+        }
+      ]
+    },
+    {
+      "dataset": "old",
+      "frequencies_hz": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "blas_threads": 4,
+      "warmup_runs": 1,
+      "timed_runs": 3,
+      "seconds_per_model": [
+        0.38455744860111735,
+        0.3853293064006721,
+        0.37949752639979123
+      ],
+      "median_s": 0.38455744860111735,
+      "mean_s": 0.38312809380052687,
+      "max_residual": 4.0942935699723355e-14,
+      "threadpools": [
+        {
+          "user_api": "blas",
+          "internal_api": "openblas",
+          "num_threads": 4,
+          "prefix": "libscipy_openblas",
+          "filepath": "/home/llp/.local/lib/python3.10/site-packages/numpy.libs/libscipy_openblas64_-56d6093b.so",
+          "version": "0.3.29",
+          "threading_layer": "pthreads",
+          "architecture": "Haswell"
+        },
+        {
+          "user_api": "blas",
+          "internal_api": "openblas",
+          "num_threads": 4,
+          "prefix": "libscipy_openblas",
+          "filepath": "/home/llp/.local/lib/python3.10/site-packages/scipy.libs/libscipy_openblas-68440149.so",
+          "version": "0.3.28",
+          "threading_layer": "pthreads",
+          "architecture": "Haswell"
+        }
+      ]
+    },
+    {
+      "dataset": "current",
+      "frequencies_hz": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "blas_threads": 32,
+      "warmup_runs": 1,
+      "timed_runs": 3,
+      "seconds_per_model": [
+        1.0822490922000725,
+        0.9965657876004116,
+        1.8637382144006551
+      ],
+      "median_s": 1.0822490922000725,
+      "mean_s": 1.314184364733713,
+      "max_residual": 2.4888957902984542e-14,
+      "threadpools": [
+        {
+          "user_api": "blas",
+          "internal_api": "openblas",
+          "num_threads": 32,
+          "prefix": "libscipy_openblas",
+          "filepath": "/home/llp/.local/lib/python3.10/site-packages/numpy.libs/libscipy_openblas64_-56d6093b.so",
+          "version": "0.3.29",
+          "threading_layer": "pthreads",
+          "architecture": "Haswell"
+        },
+        {
+          "user_api": "blas",
+          "internal_api": "openblas",
+          "num_threads": 32,
+          "prefix": "libscipy_openblas",
+          "filepath": "/home/llp/.local/lib/python3.10/site-packages/scipy.libs/libscipy_openblas-68440149.so",
+          "version": "0.3.28",
+          "threading_layer": "pthreads",
+          "architecture": "Haswell"
+        }
+      ]
+    },
+    {
+      "dataset": "current",
+      "frequencies_hz": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "blas_threads": 4,
+      "warmup_runs": 1,
+      "timed_runs": 3,
+      "seconds_per_model": [
+        0.38441160489892356,
+        0.38574857040075583,
+        0.38490775730024324
+      ],
+      "median_s": 0.38490775730024324,
+      "mean_s": 0.38502264419997423,
+      "max_residual": 5.039221922693921e-14,
+      "threadpools": [
+        {
+          "user_api": "blas",
+          "internal_api": "openblas",
+          "num_threads": 4,
+          "prefix": "libscipy_openblas",
+          "filepath": "/home/llp/.local/lib/python3.10/site-packages/numpy.libs/libscipy_openblas64_-56d6093b.so",
+          "version": "0.3.29",
+          "threading_layer": "pthreads",
+          "architecture": "Haswell"
+        },
+        {
+          "user_api": "blas",
+          "internal_api": "openblas",
+          "num_threads": 4,
+          "prefix": "libscipy_openblas",
+          "filepath": "/home/llp/.local/lib/python3.10/site-packages/scipy.libs/libscipy_openblas-68440149.so",
+          "version": "0.3.28",
+          "threading_layer": "pthreads",
+          "architecture": "Haswell"
+        }
+      ]
+    },
+    {
+      "dataset": "current",
+      "frequencies_hz": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "blas_threads": 32,
+      "warmup_runs": 1,
+      "timed_runs": 3,
+      "seconds_per_model": [
+        1.8277196991999518,
+        1.0772688130004098,
+        1.4633354006000445
+      ],
+      "median_s": 1.4633354006000445,
+      "mean_s": 1.4561079709334688,
+      "max_residual": 3.1501405296473666e-14,
+      "threadpools": [
+        {
+          "user_api": "blas",
+          "internal_api": "openblas",
+          "num_threads": 32,
+          "prefix": "libscipy_openblas",
+          "filepath": "/home/llp/.local/lib/python3.10/site-packages/numpy.libs/libscipy_openblas64_-56d6093b.so",
+          "version": "0.3.29",
+          "threading_layer": "pthreads",
+          "architecture": "Haswell"
+        },
+        {
+          "user_api": "blas",
+          "internal_api": "openblas",
+          "num_threads": 32,
+          "prefix": "libscipy_openblas",
+          "filepath": "/home/llp/.local/lib/python3.10/site-packages/scipy.libs/libscipy_openblas-68440149.so",
+          "version": "0.3.28",
+          "threading_layer": "pthreads",
+          "architecture": "Haswell"
+        }
+      ]
+    },
+    {
+      "dataset": "current",
+      "frequencies_hz": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "blas_threads": 4,
+      "warmup_runs": 1,
+      "timed_runs": 3,
+      "seconds_per_model": [
+        0.3853718455997296,
+        0.38388151450053554,
+        0.38925768969929775
+      ],
+      "median_s": 0.3853718455997296,
+      "mean_s": 0.3861703499331876,
+      "max_residual": 5.039221922693921e-14,
+      "threadpools": [
+        {
+          "user_api": "blas",
+          "internal_api": "openblas",
+          "num_threads": 4,
+          "prefix": "libscipy_openblas",
+          "filepath": "/home/llp/.local/lib/python3.10/site-packages/numpy.libs/libscipy_openblas64_-56d6093b.so",
+          "version": "0.3.29",
+          "threading_layer": "pthreads",
+          "architecture": "Haswell"
+        },
+        {
+          "user_api": "blas",
+          "internal_api": "openblas",
+          "num_threads": 4,
+          "prefix": "libscipy_openblas",
+          "filepath": "/home/llp/.local/lib/python3.10/site-packages/scipy.libs/libscipy_openblas-68440149.so",
+          "version": "0.3.28",
+          "threading_layer": "pthreads",
+          "architecture": "Haswell"
+        }
+      ]
+    }
+  ],
+  "solver_cpu_same_input_relative_difference": 0.0,
+  "saved_full_range_results": {
+    "old": {
+      "frequency_count": "10",
+      "frequency_range_hz": "8-17",
+      "meanflow_time_s": "0.0159170241667501",
+      "numerical_time_s": "0.8811386438358266",
+      "meanflow_speedup": "55.3582525605812"
+    },
+    "current": {
+      "frequency_count": "10",
+      "frequency_range_hz": "7-16",
+      "meanflow_time_s": "0.01608426655002404",
+      "numerical_time_s": "0.3165775531997497",
+      "meanflow_speedup": "19.682436386835214"
+    }
+  },
+  "profile": [
+    {
+      "blas_threads": 32,
+      "total_s": 0.6620030120000001,
+      "functions": [
+        {
+          "function": "<built-in method scipy.sparse.linalg._dsolve._superlu.gstrf>",
+          "filename": "~",
+          "line": 0,
+          "total_s": 0.591521672,
+          "cumulative_s": 0.591521672,
+          "calls": 10
+        },
+        {
+          "function": "<method 'solve' of 'SuperLU' objects>",
+          "filename": "~",
+          "line": 0,
+          "total_s": 0.020635562,
+          "cumulative_s": 0.020635562,
+          "calls": 10
+        },
+        {
+          "function": "background_green_wavefield",
+          "filename": "/home/llp/data/Helmholtz/MeanFlow4Helmholtz/dataset/generate/helmholtz.py",
+          "line": 117,
+          "total_s": 0.019342254,
+          "cumulative_s": 0.019574079,
+          "calls": 10
+        },
+        {
+          "function": "solve_scattered_wavefields",
+          "filename": "/home/llp/data/Helmholtz/MeanFlow4Helmholtz/dataset/generate/helmholtz.py",
+          "line": 168,
+          "total_s": 0.0025689880000000003,
+          "cumulative_s": 0.65488988,
+          "calls": 10
+        },
+        {
+          "function": "_norm_dispatcher",
+          "filename": "/home/llp/.local/lib/python3.10/site-packages/numpy/linalg/_linalg.py",
+          "line": 2571,
+          "total_s": 5.855000000000001e-06,
+          "cumulative_s": 5.855000000000001e-06,
+          "calls": 20
+        },
+        {
+          "function": "norm",
+          "filename": "/home/llp/.local/lib/python3.10/site-packages/numpy/linalg/_linalg.py",
+          "line": 2575,
+          "total_s": 0.00032731300000000003,
+          "cumulative_s": 0.0006293630000000001,
+          "calls": 20
+        },
+        {
+          "function": "<built-in method numpy.lib.array_utils.normalize_axis_index>",
+          "filename": "~",
+          "line": 0,
+          "total_s": 5.876e-06,
+          "cumulative_s": 5.876e-06,
+          "calls": 10
+        }
+      ]
+    },
+    {
+      "blas_threads": 4,
+      "total_s": 0.37167827000000014,
+      "functions": [
+        {
+          "function": "<built-in method scipy.sparse.linalg._dsolve._superlu.gstrf>",
+          "filename": "~",
+          "line": 0,
+          "total_s": 0.31986632800000003,
+          "cumulative_s": 0.31986632800000003,
+          "calls": 10
+        },
+        {
+          "function": "<method 'solve' of 'SuperLU' objects>",
+          "filename": "~",
+          "line": 0,
+          "total_s": 0.014905545000000001,
+          "cumulative_s": 0.014905545000000001,
+          "calls": 10
+        },
+        {
+          "function": "background_green_wavefield",
+          "filename": "/home/llp/data/Helmholtz/MeanFlow4Helmholtz/dataset/generate/helmholtz.py",
+          "line": 117,
+          "total_s": 0.014742585,
+          "cumulative_s": 0.014952732000000002,
+          "calls": 10
+        },
+        {
+          "function": "solve_scattered_wavefields",
+          "filename": "/home/llp/data/Helmholtz/MeanFlow4Helmholtz/dataset/generate/helmholtz.py",
+          "line": 168,
+          "total_s": 0.0017468190000000001,
+          "cumulative_s": 0.36762672900000004,
+          "calls": 10
+        },
+        {
+          "function": "_norm_dispatcher",
+          "filename": "/home/llp/.local/lib/python3.10/site-packages/numpy/linalg/_linalg.py",
+          "line": 2571,
+          "total_s": 4.671000000000001e-06,
+          "cumulative_s": 4.671000000000001e-06,
+          "calls": 20
+        },
+        {
+          "function": "norm",
+          "filename": "/home/llp/.local/lib/python3.10/site-packages/numpy/linalg/_linalg.py",
+          "line": 2575,
+          "total_s": 0.000254868,
+          "cumulative_s": 0.0005024890000000001,
+          "calls": 20
+        },
+        {
+          "function": "<built-in method numpy.lib.array_utils.normalize_axis_index>",
+          "filename": "~",
+          "line": 0,
+          "total_s": 6.28e-06,
+          "cumulative_s": 6.28e-06,
+          "calls": 10
+        }
+      ]
+    },
+    {
+      "blas_threads": 1,
+      "total_s": 0.35292131200000015,
+      "functions": [
+        {
+          "function": "<built-in method scipy.sparse.linalg._dsolve._superlu.gstrf>",
+          "filename": "~",
+          "line": 0,
+          "total_s": 0.30360552700000004,
+          "cumulative_s": 0.30360552700000004,
+          "calls": 10
+        },
+        {
+          "function": "<method 'solve' of 'SuperLU' objects>",
+          "filename": "~",
+          "line": 0,
+          "total_s": 0.013318124,
+          "cumulative_s": 0.013318124,
+          "calls": 10
+        },
+        {
+          "function": "background_green_wavefield",
+          "filename": "/home/llp/data/Helmholtz/MeanFlow4Helmholtz/dataset/generate/helmholtz.py",
+          "line": 117,
+          "total_s": 0.014979873000000001,
+          "cumulative_s": 0.015193903000000002,
+          "calls": 10
+        },
+        {
+          "function": "solve_scattered_wavefields",
+          "filename": "/home/llp/data/Helmholtz/MeanFlow4Helmholtz/dataset/generate/helmholtz.py",
+          "line": 168,
+          "total_s": 0.00163696,
+          "cumulative_s": 0.348912263,
+          "calls": 10
+        },
+        {
+          "function": "_norm_dispatcher",
+          "filename": "/home/llp/.local/lib/python3.10/site-packages/numpy/linalg/_linalg.py",
+          "line": 2571,
+          "total_s": 3.905e-06,
+          "cumulative_s": 3.905e-06,
+          "calls": 20
+        },
+        {
+          "function": "norm",
+          "filename": "/home/llp/.local/lib/python3.10/site-packages/numpy/linalg/_linalg.py",
+          "line": 2575,
+          "total_s": 0.00024448300000000004,
+          "cumulative_s": 0.000462018,
+          "calls": 20
+        },
+        {
+          "function": "<built-in method numpy.lib.array_utils.normalize_axis_index>",
+          "filename": "~",
+          "line": 0,
+          "total_s": 5.1820000000000005e-06,
+          "cumulative_s": 5.1820000000000005e-06,
+          "calls": 10
+        }
+      ]
+    },
+    {
+      "blas_threads": 4,
+      "total_s": 0.3627132830000001,
+      "functions": [
+        {
+          "function": "<built-in method scipy.sparse.linalg._dsolve._superlu.gstrf>",
+          "filename": "~",
+          "line": 0,
+          "total_s": 0.312486459,
+          "cumulative_s": 0.312486459,
+          "calls": 10
+        },
+        {
+          "function": "<method 'solve' of 'SuperLU' objects>",
+          "filename": "~",
+          "line": 0,
+          "total_s": 0.013996051,
+          "cumulative_s": 0.013996051,
+          "calls": 10
+        },
+        {
+          "function": "background_green_wavefield",
+          "filename": "/home/llp/data/Helmholtz/MeanFlow4Helmholtz/dataset/generate/helmholtz.py",
+          "line": 117,
+          "total_s": 0.014826230000000001,
+          "cumulative_s": 0.015031838,
+          "calls": 10
+        },
+        {
+          "function": "solve_scattered_wavefields",
+          "filename": "/home/llp/data/Helmholtz/MeanFlow4Helmholtz/dataset/generate/helmholtz.py",
+          "line": 168,
+          "total_s": 0.001733348,
+          "cumulative_s": 0.358595382,
+          "calls": 10
+        },
+        {
+          "function": "_norm_dispatcher",
+          "filename": "/home/llp/.local/lib/python3.10/site-packages/numpy/linalg/_linalg.py",
+          "line": 2571,
+          "total_s": 4.262e-06,
+          "cumulative_s": 4.262e-06,
+          "calls": 20
+        },
+        {
+          "function": "norm",
+          "filename": "/home/llp/.local/lib/python3.10/site-packages/numpy/linalg/_linalg.py",
+          "line": 2575,
+          "total_s": 0.000251194,
+          "cumulative_s": 0.00046746600000000004,
+          "calls": 20
+        },
+        {
+          "function": "<built-in method numpy.lib.array_utils.normalize_axis_index>",
+          "filename": "~",
+          "line": 0,
+          "total_s": 5.095e-06,
+          "cumulative_s": 5.095e-06,
+          "calls": 10
+        }
+      ]
+    },
+    {
+      "blas_threads": 32,
+      "total_s": 0.7098953070000003,
+      "functions": [
+        {
+          "function": "<built-in method scipy.sparse.linalg._dsolve._superlu.gstrf>",
+          "filename": "~",
+          "line": 0,
+          "total_s": 0.6418736220000001,
+          "cumulative_s": 0.6418736220000001,
+          "calls": 10
+        },
+        {
+          "function": "<method 'solve' of 'SuperLU' objects>",
+          "filename": "~",
+          "line": 0,
+          "total_s": 0.019416465,
+          "cumulative_s": 0.019416465,
+          "calls": 10
+        },
+        {
+          "function": "background_green_wavefield",
+          "filename": "/home/llp/data/Helmholtz/MeanFlow4Helmholtz/dataset/generate/helmholtz.py",
+          "line": 117,
+          "total_s": 0.019602324,
+          "cumulative_s": 0.019832015,
+          "calls": 10
+        },
+        {
+          "function": "solve_scattered_wavefields",
+          "filename": "/home/llp/data/Helmholtz/MeanFlow4Helmholtz/dataset/generate/helmholtz.py",
+          "line": 168,
+          "total_s": 0.002260962,
+          "cumulative_s": 0.703230853,
+          "calls": 10
+        },
+        {
+          "function": "_norm_dispatcher",
+          "filename": "/home/llp/.local/lib/python3.10/site-packages/numpy/linalg/_linalg.py",
+          "line": 2571,
+          "total_s": 7.276e-06,
+          "cumulative_s": 7.276e-06,
+          "calls": 20
+        },
+        {
+          "function": "norm",
+          "filename": "/home/llp/.local/lib/python3.10/site-packages/numpy/linalg/_linalg.py",
+          "line": 2575,
+          "total_s": 0.000359996,
+          "cumulative_s": 0.0012949930000000001,
+          "calls": 20
+        },
+        {
+          "function": "<built-in method numpy.lib.array_utils.normalize_axis_index>",
+          "filename": "~",
+          "line": 0,
+          "total_s": 6.916e-06,
+          "cumulative_s": 6.916e-06,
+          "calls": 10
+        }
+      ]
+    }
+  ],
+  "caveats": [
+    "Historical directory has no raw repetitions or runtime metadata, so its actual historical BLAS thread count is unknown.",
+    "32 is the current environment default observed during this audit; threadpool_limits explicitly set the controlled conditions.",
+    "Diagnostic CPU timings use one warm-up and three complete passes over ten models and ten frequencies, independently of the saved production experiment.",
+    "Controlled diagnostics and saved production results ran at different times and may differ due to runtime system state."
+  ]
+}

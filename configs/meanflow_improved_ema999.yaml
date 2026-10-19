@@ -1,5 +1,6 @@
 experiment:
   name: meanflow_improved_ema999
+  device: cuda
   output_dir: checkpoint/meanflow_improved_ema999
   seed: 42
 method:
@@ -7,10 +8,8 @@ method:
 data:
   train_root: dataset/train
   val_root: dataset/val
-  test_root: dataset/test
-  frequencies_hz: [8, 10, 12, 14, 16]
+  frequencies_hz: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
   source_count: 4
-  test_model_names: [marmousi, segeage_salt, otway, overthrust]
   num_workers: 0
   normalization_epsilon: 1.0e-6
   normalization_chunk_models: 16
@@ -68,3 +67,13 @@ train:
 validation:
   selection_metric: relative_l2
   max_batches: null
+
+sensitivity_monitor:
+  # Diagnostic only: printed during training and excluded from optimization.
+  solver_config: configs/generate_dataset.yaml
+  model_indices: [0, 1]
+  frequency_indices: [0, 5, 13]
+  source_indices: [0]
+  directions_per_model: 1
+  direction_smoothing_sigma: 2.0
+  seed: 31415

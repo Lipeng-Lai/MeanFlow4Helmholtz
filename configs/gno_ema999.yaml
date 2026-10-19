@@ -2,22 +2,26 @@ experiment:
   name: gno_ema999
   output_dir: checkpoint/gno_ema999
   seed: 42
+
 method:
   type: gno
+
 data:
   train_root: dataset/train
   val_root: dataset/val
-  test_root: dataset/test
-  frequencies_hz: [8, 10, 12, 14, 16]
+  frequencies_hz: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
   source_count: 4
-  test_model_names: [marmousi, segeage_salt, otway, overthrust]
   num_workers: 0
   normalization_epsilon: 1.0e-6
   normalization_chunk_models: 16
+
 physics:
   spacing_km: [0.01, 0.01]
   background_velocity_km_s: 1.5
+
 model:
+  # The diffusion GNO uses the same conditional channels and target layout as
+  # the direct FNO: (Re(U0), Im(U0), velocity) -> (Re(dU), Im(dU)).
   backbone: unet
   noisy_channels: 2
   condition_channels: 3
@@ -28,16 +32,17 @@ model:
   attention_downsample_factors: [4, 8, 16]
   num_heads: 4
   dropout: 0.0
+
 diffusion:
   steps: 1000
   schedule: cosine
   prediction: x0
   clip_denoised: false
+
 sampling:
   steps: 1
   eta: 0.0
-  pde_guidance:
-    enabled: false
+
 train:
   max_steps: 200000
   batch_size: 16
@@ -55,6 +60,17 @@ train:
   scheduler:
     type: cosine
     eta_min: 1.0e-6
+
 validation:
   selection_metric: relative_l2
   max_batches: null
+
+sensitivity_monitor:
+  # Diagnostic only: printed during training and excluded from diffusion loss.
+  solver_config: configs/generate_dataset.yaml
+  model_indices: [0, 1]
+  frequency_indices: [0, 5, 13]
+  source_indices: [0]
+  directions_per_model: 1
+  direction_smoothing_sigma: 2.0
+  seed: 31415

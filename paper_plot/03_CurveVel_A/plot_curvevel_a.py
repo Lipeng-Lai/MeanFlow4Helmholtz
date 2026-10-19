@@ -1,13 +1,14 @@
 """Plot the selected CurveVel-A comparison sample as a 2-by-4 figure.
 
-The selected validation example is the requested sample from
-``test_openfwi/gno_ema999_vs_meanflow_ema999_samples.csv``:
+The selected validation example is the original CurveVel-A model from
+``curvevel_a_2``, source model 244 in ``dataset/val/models.csv``, at 12 Hz
+with source position (x, z) = (51, 2):
 
-    sample_index=2306, model_index=115, frequency_index=1, source_index=2
+    sample_index=6647, model_index=118, frequency_index=9, source_index=3
 
 The field panels use the real component by default.  Pass ``--component
 imag`` to render the corresponding imaginary component instead.  The
-    sampling-step panel evaluates the current sample without PDE guidance.
+sampling-step panel evaluates the current sample without PDE guidance.
 """
 
 from __future__ import annotations
@@ -31,6 +32,10 @@ PREDICTION_STEPS = 1
 sys.path.insert(0, str(ROOT))
 
 from diffusion import GaussianDiffusion  # noqa: E402
+from dataset.generate.helmholtz import (  # noqa: E402
+    background_green_wavefield,
+    solve_scattered_wavefields,
+)
 from diffusion.sampling import ddim_sample  # noqa: E402
 from meanflow import improved_meanflow_sample  # noqa: E402
 from models import build_model  # noqa: E402
@@ -40,11 +45,11 @@ from utils.normalization import PhysicalNormalizer  # noqa: E402
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-SAMPLE_INDEX = 2306
-MODEL_INDEX = 115
-FREQUENCY_INDEX = 1
-SOURCE_INDEX = 2
-FREQUENCIES_HZ = [8, 10, 12, 14, 16]
+SAMPLE_INDEX = 6647
+MODEL_INDEX = 118
+FREQUENCY_INDEX = 9
+SOURCE_INDEX = 3
+FREQUENCIES_HZ = list(range(3, 17))
 SOURCE_COUNT = 4
 COMPONENT_NAMES = ("Real", "Imaginary")
 
@@ -57,12 +62,14 @@ BACKGROUND_VMIN = -0.25
 BACKGROUND_VMAX = 0.25
 PREDICTION_VMIN = -0.20
 PREDICTION_VMAX = 0.20
-ERROR_VMIN = -0.02
 ERROR_VMAX = 0.02
+ERROR_VMIN = -ERROR_VMAX
 VELOCITY_VMIN = 1500.0
 VELOCITY_VMAX = 4500.0
 
-SAMPLING_STEPS = [1, 2, 5, 10]
+SAMPLING_STEPS = [1, 2, 4, 8]
+SAMPLING_LEGEND_LOC = "upper right"
+SAMPLING_LEGEND_BBOX_TO_ANCHOR = None
 METHOD_COLORS = {"diffusion": "#0072B2", "meanflow": "#D55E00"}
 METHOD_DISPLAY_NAMES = {
     "diffusion": "Diffusion",
@@ -119,6 +126,32 @@ def load_checkpoint(checkpoint_name: str):
     return config, model, normalizer, diffusion
 
 
+def stored_frequency_indices(background_all: np.ndarray, generation: dict) -> dict[int, int]:
+    """Identify stored frequencies from the physical backgrounds for either split."""
+    expected = []
+    for frequency in FREQUENCIES_HZ:
+        fields = np.stack([
+            background_green_wavefield(
+                background_all.shape[-2:], (DZ_KM, DX_KM), (SOURCE_Z_INDEX, x),
+                frequency, generation["physics"]["background_velocity_km_s"],
+                generation["source"].get("singularity_radius_cells", 0.5),
+            ) for x in SOURCE_X_INDICES
+        ])
+        expected.append(np.stack((fields.real, fields.imag), axis=1))
+    expected = np.asarray(expected, dtype=np.float32)
+    mapping = {}
+    for index, background in enumerate(background_all):
+        errors = np.linalg.norm(
+            (expected - background).reshape(len(FREQUENCIES_HZ), -1), axis=1
+        ) / max(float(np.linalg.norm(background)), 1e-12)
+        best = int(np.argmin(errors))
+        frequency = FREQUENCIES_HZ[best]
+        if not np.isfinite(errors).all() or errors[best] > 1e-5 or frequency in mapping:
+            raise ValueError(f"cannot identify stored frequency at index {index}")
+        mapping[frequency] = index
+    return mapping
+
+
 def load_sample() -> tuple[
     np.ndarray, np.ndarray, np.ndarray, torch.Tensor, torch.Tensor
 ]:
@@ -134,6 +167,8 @@ def load_sample() -> tuple[
     velocity_all = np.load(split_root / "data" / "velocity.npy", mmap_mode="r")
     background_all = np.load(split_root / "data" / "background.npy", mmap_mode="r")
     label_all = np.load(split_root / "label.npy", mmap_mode="r")
+    if background_all.shape[1] != SOURCE_COUNT:
+        raise ValueError("configured source count does not match stored data")
 
     if SOURCE_VELOCITY_PATH is None:
         velocity = np.asarray(velocity_all[MODEL_INDEX, 0], dtype=np.float32)
@@ -141,12 +176,27 @@ def load_sample() -> tuple[
         velocity = np.asarray(
             np.load(SOURCE_VELOCITY_PATH, mmap_mode="r"), dtype=np.float32
         ) * 0.001
-    background = np.asarray(
-        background_all[FREQUENCY_INDEX, SOURCE_INDEX], dtype=np.float32
-    )
-    target = np.asarray(
-        label_all[MODEL_INDEX, FREQUENCY_INDEX, SOURCE_INDEX], dtype=np.float32
-    )
+    generation = load_config(ROOT / "configs" / "generate_dataset.yaml")
+    stored = stored_frequency_indices(background_all, generation)
+    frequency = FREQUENCIES_HZ[FREQUENCY_INDEX]
+    if frequency in stored:
+        stored_index = stored[frequency]
+        background = np.asarray(background_all[stored_index, SOURCE_INDEX], dtype=np.float32)
+        target = np.asarray(label_all[MODEL_INDEX, stored_index, SOURCE_INDEX], dtype=np.float32)
+    else:
+        background_complex, scattered, residuals = solve_scattered_wavefields(
+            velocity_km_s=velocity,
+            source_positions_rc=[(SOURCE_Z_INDEX, SOURCE_X_INDICES[SOURCE_INDEX])],
+            frequency_hz=frequency,
+            background_velocity_km_s=generation["physics"]["background_velocity_km_s"],
+            spacing_km=(DZ_KM, DX_KM), solver_config=generation["solver"],
+            singularity_radius_cells=generation["source"].get("singularity_radius_cells", 0.5),
+        )
+        tolerance = generation["solver"]["relative_residual_tolerance"]
+        if not np.isfinite(residuals).all() or np.max(residuals) > tolerance:
+            raise RuntimeError(f"Helmholtz residual exceeds tolerance at {frequency} Hz")
+        background = np.stack((background_complex[0].real, background_complex[0].imag)).astype(np.float32)
+        target = np.stack((scattered[0].real, scattered[0].imag)).astype(np.float32)
     condition = np.concatenate((background, velocity[None]), axis=0).astype(np.float32)
 
     noise_generator = torch.Generator().manual_seed(42 + SAMPLE_INDEX)
@@ -262,10 +312,13 @@ def plot_sampling_accuracy(ax: plt.Axes, values: dict[str, dict[int, float]]) ->
     ax.set_xlabel("Sampling steps")
     ax.set_ylabel(r"Relative $\mathit{L}_{2}$ Error")
     ax.set_title("Sampling-Step Comparison", pad=4, fontsize=13)
-    ax.set_xlim(0.5, 10.5)
+    ax.set_xlim(min(SAMPLING_STEPS) - 0.5, max(SAMPLING_STEPS) + 0.5)
     ax.set_xticks(SAMPLING_STEPS)
     ax.grid(True, linestyle="--", linewidth=0.7, alpha=0.30, zorder=0)
-    ax.legend(frameon=False, loc="upper right", fontsize=13)
+    legend_kwargs = {"frameon": False, "loc": SAMPLING_LEGEND_LOC, "fontsize": 13}
+    if SAMPLING_LEGEND_BBOX_TO_ANCHOR is not None:
+        legend_kwargs["bbox_to_anchor"] = SAMPLING_LEGEND_BBOX_TO_ANCHOR
+    ax.legend(**legend_kwargs)
     ax.set_box_aspect(1)
     ax.tick_params(direction="out", length=3, width=0.7)
 
@@ -283,8 +336,8 @@ def add_source_marker(ax: plt.Axes) -> None:
     )
 
 
-def main() -> None:
-    args = parse_args()
+def main(args: argparse.Namespace | None = None) -> None:
+    args = parse_args() if args is None else args
     configure_style()
     component_index = 0 if args.component == "real" else 1
     component_name = COMPONENT_NAMES[component_index]

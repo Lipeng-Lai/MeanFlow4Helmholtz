@@ -1,0 +1,30 @@
+experiment:
+  name: numerical_helmholtz_forward
+  output_dir: outputs/numerical_forward
+
+data:
+  raw_velocity_file: dataset/velocity_models/CurveVel_A_1.npy
+  source_model_index: 0
+  velocity_scale_to_km_s: 0.001
+  frequencies_hz: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+  source_positions_zx: [[2, 21], [2, 31], [2, 41], [2, 51]]
+  spacing_km: [0.01, 0.01]
+  background_velocity_km_s: 1.5
+  singularity_radius_cells: 0.5
+
+initialization:
+  type: gaussian_smooth_true
+  sigma: 5.0
+
+solver:
+  device: cuda
+  stencil: nine_point_isotropic
+  absorbing_layer:
+    padding_cells: 12
+    strength: 1.5
+    power: 2.0
+    complex_sign: -1.0
+  relative_residual_tolerance: 1.0e-8
+
+figures:
+  source_index: 0

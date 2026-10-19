@@ -1,0 +1,47 @@
+frequencies_hz: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+
+grid:
+  shape: [70, 70]
+  spacing_km: [0.01, 0.01]
+
+physics:
+  background_velocity_km_s: 1.5
+
+source:
+  placement: fixed
+  # User coordinates are [x,z]; the solver consumes [z,x].
+  x_indices: [21, 31, 41, 51]
+  z_index: 2
+  singularity_radius_cells: 0.5
+
+solver:
+  stencil: nine_point_isotropic
+  absorbing_layer:
+    padding_cells: 12
+    strength: 1.5
+    power: 2.0
+    complex_sign: -1.0
+  relative_residual_tolerance: 1.0e-8
+
+smoothing:
+  variants_per_model: 1
+  sigma_range: [1.0, 2.0]
+  seed: 42
+  mode: reflect
+
+dataset:
+  output_root: dataset
+  storage_format: paired_factorized_npy
+  dtype: float32
+  velocity_scale_to_km_s: 0.001
+  split_seed: 42
+  train_models_per_group: 480
+  val_models_per_group: 20
+  workers: 12
+  resume: true
+  overwrite: false
+  model_groups:
+    curvevel_a_1: dataset/velocity_models/CurveVel_A_1.npy
+    curvevel_a_2: dataset/velocity_models/CurveVel_A_2.npy
+    flatfault_a_1: dataset/velocity_models/FlatFault_A_1.npy
+    flatfault_a_2: dataset/velocity_models/FlatFault_A_2.npy

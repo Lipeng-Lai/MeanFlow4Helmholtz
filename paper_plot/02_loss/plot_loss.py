@@ -11,6 +11,10 @@ ROOT = Path(__file__).resolve().parents[2]
 OUTPUT_DIR = Path(__file__).resolve().parent
 
 METHODS = {
+    "fno": {
+        "log_path": ROOT / "checkpoint/fno/runlog.txt",
+        "color": "#009E73",
+    },
     "diffusion": {
         "log_path": ROOT / "checkpoint/gno_ema999/runlog.txt",
         "color": "#0072B2",
@@ -22,6 +26,7 @@ METHODS = {
 }
 
 DISPLAY_NAMES = {
+    "fno": "FNO",
     "diffusion": "Diffusion",
     "meanflow": "Mean Flows",
 }
@@ -83,7 +88,7 @@ def main() -> None:
         ("relative_l2", r"Relative $\mathit{L}_{2}$ Error"),
     )
 
-    for ax, (metric, ylabel) in zip(axes, panels):
+    for panel_index, (ax, (metric, ylabel)) in enumerate(zip(axes, panels)):
         for name, spec in METHODS.items():
             rows = curves[name]
             steps = sorted(rows)
@@ -98,8 +103,12 @@ def main() -> None:
         ax.set_xlabel("Steps")
         ax.set_ylabel(ylabel)
         ax.set_xlim(left=0)
-        if metric == "val_mse":
+        # Keep the MSE panel logarithmic for the wide dynamic range.  Panel
+        # (b), requested for direct visual comparison, uses a linear y-axis.
+        if panel_index == 0:
             ax.set_yscale("log")
+        else:
+            ax.set_yscale("linear")
         ax.grid(True, linestyle="--", linewidth=0.7, alpha=0.30)
         ax.legend(frameon=False, loc="best")
 
@@ -126,6 +135,8 @@ def main() -> None:
         writer.writerow(
             [
                 "step",
+                "fno_val_mse",
+                "fno_relative_l2",
                 "diffusion_val_mse",
                 "diffusion_relative_l2",
                 "meanflow_val_mse",
@@ -136,6 +147,8 @@ def main() -> None:
             writer.writerow(
                 [
                     step,
+                    curves["fno"][step]["val_mse"],
+                    curves["fno"][step]["relative_l2"],
                     curves["diffusion"][step]["val_mse"],
                     curves["diffusion"][step]["relative_l2"],
                     curves["meanflow"][step]["val_mse"],
