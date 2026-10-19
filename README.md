@@ -40,7 +40,8 @@ python dataset/generate/generate_dataset.py \
 
 The configuration defines the frequencies, 70×70 grid, source positions,
 absorbing boundary, numerical stencil, and dataset split. If the data are
-already available, this step can be skipped.
+already available, this step can be skipped. line: 通过网盘分享的文件：MeanFlow4Helmholtz_data
+链接: https://pan.baidu.com/s/1f8yIR9v1LBTUAZypEgcHCw?pwd=6pby 提取码: 6pby
 
 ## 2. Train the three experiments
 
